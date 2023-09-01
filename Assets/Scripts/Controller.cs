@@ -21,9 +21,9 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
             PrepareAction(defaultAttackAction);
-        else
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
             PrepareAction(null);
 
         #region Preparing Action
@@ -47,12 +47,12 @@ public class Controller : MonoBehaviour
                 desiredRot.z = transform.rotation.z;
 
                 transform.rotation = desiredRot;
-            }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                //TODO: cast action here
-                Debug.Log("Shoot");
+                //On left click
+                if (Input.GetMouseButtonDown(0))
+                {
+                    preparedAction.UseAction(this, pos);
+                }
             }
 
             return;
