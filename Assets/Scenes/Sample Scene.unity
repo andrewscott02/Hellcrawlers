@@ -601,3 +601,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1403453645}
+  defaultAttackAction: {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8,
+    type: 2}
