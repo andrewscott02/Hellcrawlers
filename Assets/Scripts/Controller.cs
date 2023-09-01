@@ -7,12 +7,14 @@ public class Controller : MonoBehaviour
 {
     public Camera cam;
     NavMeshAgent agent;
+    Animator animController;
 
     Vector3 pos;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animController = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,13 @@ public class Controller : MonoBehaviour
                 agent.SetDestination(pos);
             }
         }
+
+        AnimateMove(Vector3.Distance(transform.position, agent.destination) > 1f);
+    }
+
+    void AnimateMove(bool moving)
+    {
+        animController.SetBool("Moving", moving);
     }
 
     private void OnDrawGizmosSelected()
@@ -47,6 +56,9 @@ public class Controller : MonoBehaviour
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(ray.origin, hit.point);
+
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(transform.position, hit.point);
             }
             else
             {
