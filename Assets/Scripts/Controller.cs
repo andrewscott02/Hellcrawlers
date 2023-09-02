@@ -52,6 +52,7 @@ public class Controller : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     preparedAction.UseAction(this, pos);
+                    animController.SetTrigger("Attack");
                 }
             }
 
