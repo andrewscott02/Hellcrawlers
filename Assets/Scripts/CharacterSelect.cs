@@ -9,6 +9,11 @@ public class CharacterSelect : MonoBehaviour
 
     private void Start()
     {
+        Invoke("Setup", 0.5f);
+    }
+
+    void Setup()
+    {
         SelectCharacter(0);
     }
 

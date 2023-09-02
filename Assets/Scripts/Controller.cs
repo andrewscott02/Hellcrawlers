@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Controller : MonoBehaviour
 {
+    public LayerMask layerMask = new LayerMask();
+
     public bool controlled = false;
     public Camera cam;
     NavMeshAgent agent;
@@ -47,8 +49,14 @@ public class Controller : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 100, layerMask))
             {
+                Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag);
+                if (hit.collider.tag == "Character")
+                {
+                    //TODO:Highlight character
+                }
+
                 //Rotate towards mouse pos
                 pos = hit.point;
 
@@ -63,7 +71,13 @@ public class Controller : MonoBehaviour
                 //On left click
                 if (Input.GetMouseButtonDown(0))
                 {
-                    preparedAction.UseAction(this, pos);
+                    Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
+                    if (hit.collider.tag == "Character")
+                    {
+                        //TODO:Highlight character
+                    }
+
+                    preparedAction.UseAction(this, pos, target);
                     animController.SetTrigger("Attack");
                 }
             }
@@ -82,7 +96,7 @@ public class Controller : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 100, layerMask))
             {
                 //Set unit destination to mouse pos
                 pos = hit.point;
