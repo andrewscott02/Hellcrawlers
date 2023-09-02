@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class Controller : MonoBehaviour
 {
+    public bool controlled = false;
     public Camera cam;
     NavMeshAgent agent;
     Animator animController;
@@ -18,9 +19,20 @@ public class Controller : MonoBehaviour
         animController = GetComponentInChildren<Animator>();
     }
 
+    public void Unselect()
+    {
+        StopMovement();
+        pos = transform.position;
+        AnimateMove(false);
+        PrepareAction(null);
+        controlled = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!controlled) return;
+
         if (Input.GetKeyDown(KeyCode.LeftControl))
             PrepareAction(defaultAttackAction);
         else if (Input.GetKeyUp(KeyCode.LeftControl))
