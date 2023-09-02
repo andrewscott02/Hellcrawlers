@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CharacterSelect : MonoBehaviour
 {
+    ActionSelect actionSelect;
     int selectedCharacter;
     public Controller[] availableCharacters;
 
     private void Start()
     {
-        Invoke("Setup", 0.5f);
+        actionSelect = GameObject.FindAnyObjectByType<ActionSelect>();
+        Invoke("Setup", 0.05f);
     }
 
     void Setup()
@@ -19,12 +21,29 @@ public class CharacterSelect : MonoBehaviour
 
     public void SelectCharacter(int index)
     {
-        foreach(var item in availableCharacters)
-        {
-            item.Unselect();
-        }
+        InputManager.inputAvailable = false;
 
         selectedCharacter = index;
+
+        foreach (var item in availableCharacters)
+        {
+            item.Unselect();
+            item.StopMovement();
+        }
+
         availableCharacters[selectedCharacter].controlled = true;
+        actionSelect.ActionList();
+
+        Invoke("ResetInput", 0.5f);
+    }
+
+    void ResetInput()
+    {
+        InputManager.inputAvailable = true;
+    }
+
+    public Controller GetSelectedCharacter()
+    {
+        return availableCharacters[selectedCharacter];
     }
 }

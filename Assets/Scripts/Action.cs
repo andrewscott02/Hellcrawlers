@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewAction", menuName = "Units/Action", order = 0)]
 public class Action : ScriptableObject
 {
+    public string actionName;
     public Object castFX;
 
     public int damage = 0;

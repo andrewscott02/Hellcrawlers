@@ -11,7 +11,7 @@ public class Controller : MonoBehaviour
     public Camera cam;
     NavMeshAgent agent;
     Animator animController;
-    public Action defaultAttackAction;
+    public Action[] actions;
 
     Vector3 pos;
 
@@ -37,11 +37,13 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!controlled) return;
+        if (!controlled || InputManager.inputAvailable == false)
+        {
+            StopMovement();
+            return;
+        }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-            PrepareAction(defaultAttackAction);
-        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Backspace) || Input.GetMouseButtonDown(1))
             PrepareAction(null);
 
         #region Preparing Action
@@ -143,6 +145,7 @@ public class Controller : MonoBehaviour
     public void StopMovement()
     {
         agent.SetDestination(transform.position);
+        AnimateMove(false);
     }
 
     private void OnDrawGizmosSelected()
