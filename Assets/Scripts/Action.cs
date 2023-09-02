@@ -7,8 +7,12 @@ public class Action : ScriptableObject
 {
     public Object castFX;
 
-    public int damage = 1;
+    public int damage = 0;
     public int changeArmour = 0;
+    public float range = 20;
+
+    [TextArea(3, 10)]
+    public string description;
 
     public void PrepareAction(Controller character)
     {

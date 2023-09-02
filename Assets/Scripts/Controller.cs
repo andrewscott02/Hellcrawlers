@@ -51,7 +51,9 @@ public class Controller : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100, layerMask))
             {
-                Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag);
+                float distance = Vector3.Distance(gameObject.transform.position, hit.point);
+
+                Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag + " | " + distance);
                 if (hit.collider.tag == "Character")
                 {
                     //TODO:Highlight character
@@ -69,13 +71,9 @@ public class Controller : MonoBehaviour
                 transform.rotation = desiredRot;
 
                 //On left click
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && distance <= preparedAction.range)
                 {
                     Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
-                    if (hit.collider.tag == "Character")
-                    {
-                        //TODO:Highlight character
-                    }
 
                     preparedAction.UseAction(this, pos, target);
                     animController.SetTrigger("Attack");

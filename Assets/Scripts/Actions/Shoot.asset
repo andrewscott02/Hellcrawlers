@@ -15,3 +15,5 @@ MonoBehaviour:
   castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
   damage: 3
   changeArmour: 0
+  range: 20
+  description: Hit a target for 3 damage

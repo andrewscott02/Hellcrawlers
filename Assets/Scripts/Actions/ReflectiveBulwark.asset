@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc4f71b218818524b839f7a26def5e76, type: 3}
-  m_Name: CannonBlast
+  m_Name: ReflectiveBulwark
   m_EditorClassIdentifier: 
   castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
-  damage: 10
-  changeArmour: 0
-  range: 20
-  description: Hit a target for 10 damage
+  damage: 0
+  changeArmour: 3
+  range: 1
+  description: 'Gain 3 armour
+
+
+    Reflect all attacks that target only you until
+    the start of your next turn'
