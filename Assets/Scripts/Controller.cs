@@ -15,10 +15,13 @@ public class Controller : MonoBehaviour
 
     Vector3 pos;
 
+    TargetEffect targetEffect;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animController = GetComponentInChildren<Animator>();
+        targetEffect = GameObject.FindAnyObjectByType<TargetEffect>();
     }
 
     public void Unselect()
@@ -28,6 +31,7 @@ public class Controller : MonoBehaviour
         AnimateMove(false);
         PrepareAction(null);
         controlled = false;
+        targetEffect.StopHighlight();
     }
 
     // Update is called once per frame
@@ -53,10 +57,16 @@ public class Controller : MonoBehaviour
             {
                 float distance = Vector3.Distance(gameObject.transform.position, hit.point);
 
-                Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag + " | " + distance);
+                Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag);
                 if (hit.collider.tag == "Character")
                 {
-                    //TODO:Highlight character
+                    distance = Vector3.Distance(gameObject.transform.position, hit.collider.transform.position);
+                    Color highlightColour = distance <= preparedAction.range ? Color.green : Color.red;
+                    targetEffect.Highlight(hit.collider.transform.position, highlightColour);
+                }
+                else
+                {
+                    targetEffect.StopHighlight();
                 }
 
                 //Rotate towards mouse pos
@@ -71,12 +81,19 @@ public class Controller : MonoBehaviour
                 transform.rotation = desiredRot;
 
                 //On left click
-                if (Input.GetMouseButtonDown(0) && distance <= preparedAction.range)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
+                    if (distance <= preparedAction.range)
+                    {
+                        Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
 
-                    preparedAction.UseAction(this, pos, target);
-                    animController.SetTrigger("Attack");
+                        preparedAction.UseAction(this, pos, target);
+                        animController.SetTrigger("Attack");
+                    }
+                    else
+                    {
+                        Debug.Log("Out of range");
+                    }
                 }
             }
 
@@ -116,6 +133,7 @@ public class Controller : MonoBehaviour
 
     public void PrepareAction(Action action)
     {
+        targetEffect.StopHighlight();
         preparedAction = action;
         animController.SetBool("Aiming", preparedAction != null);
         if (preparedAction != null)
