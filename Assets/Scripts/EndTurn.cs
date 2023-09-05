@@ -7,10 +7,18 @@ public class EndTurn : MonoBehaviour
     bool playerTurn = false;
     public List<Controller> playerCharacters;
 
+    private void Start()
+    {
+        StartPlayerTurn();
+    }
+
     public void ButtonPressed()
     {
-        if (!playerTurn) return;
+        InputManager.inputAvailable = false;
 
+        Invoke("ResetInput", 0.5f);
+
+        if (!playerTurn) return;
         playerTurn = false;
 
         //TODO: Start enemy turn
@@ -25,5 +33,10 @@ public class EndTurn : MonoBehaviour
         }
 
         playerTurn = true;
+    }
+
+    void ResetInput()
+    {
+        InputManager.inputAvailable = true;
     }
 }

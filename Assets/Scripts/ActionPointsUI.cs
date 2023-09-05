@@ -7,11 +7,13 @@ public class ActionPointsUI : MonoBehaviour
 {
     public static ActionPointsUI instance;
     public Image[] images;
+    public Slider movementSlider;
 
     private void Start()
     {
         instance = this;
         DisplayAP(0);
+        DisplayMovement(0);
     }
 
     public void DisplayAP(int ap)
@@ -20,5 +22,10 @@ public class ActionPointsUI : MonoBehaviour
         {
             images[i].color = ap > i ? Color.green : Color.red;
         }
+    }
+
+    public void DisplayMovement(float movement)
+    {
+        movementSlider.value = movement;
     }
 }

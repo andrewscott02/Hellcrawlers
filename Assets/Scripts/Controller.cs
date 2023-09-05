@@ -38,96 +38,116 @@ public class Controller : MonoBehaviour
         targetEffect.StopHighlight();
     }
 
+    Vector3 startPos;
+    Vector3 endPos;
+
     // Update is called once per frame
     void Update()
     {
-        if (!controlled || InputManager.inputAvailable == false)
+        if (controlled && InputManager.inputAvailable)
         {
-            StopMovement();
-            return;
-        }
+            if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Backspace) || Input.GetMouseButtonDown(1))
+                PrepareAction(null);
 
-        if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Backspace) || Input.GetMouseButtonDown(1))
-            PrepareAction(null);
-
-        #region Preparing Action
-
-        //While preparing
-        if (preparedAction != null)
-        {
-            //Rotate to mouse pos
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100, layerMask))
+            //While preparing
+            if (preparedAction != null)
             {
-                float distance = Vector3.Distance(gameObject.transform.position, hit.point);
+                #region Preparing Action
 
-                Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag);
-                if (hit.collider.tag == "Character")
+                //Rotate to mouse pos
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100, layerMask))
                 {
-                    distance = Vector3.Distance(gameObject.transform.position, hit.collider.transform.position);
-                    Color highlightColour = distance <= preparedAction.range ? Color.green : Color.red;
-                    targetEffect.Highlight(hit.collider.transform.position, highlightColour);
-                }
-                else
-                {
-                    targetEffect.StopHighlight();
-                }
+                    float distance = Vector3.Distance(gameObject.transform.position, hit.point);
 
-                //Rotate towards mouse pos
-                pos = hit.point;
-
-                Vector3 direction = pos - transform.position;
-                Quaternion desiredRot = Quaternion.LookRotation(direction);
-
-                desiredRot.x = transform.rotation.x;
-                desiredRot.z = transform.rotation.z;
-
-                transform.rotation = desiredRot;
-
-                //On left click
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (distance <= preparedAction.range)
+                    Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag);
+                    if (hit.collider.tag == "Character")
                     {
-                        Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
-
-                        preparedAction.UseAction(this, pos, target);
-                        animController.SetTrigger("Attack");
+                        distance = Vector3.Distance(gameObject.transform.position, hit.collider.transform.position);
+                        Color highlightColour = distance <= preparedAction.range ? Color.green : Color.red;
+                        targetEffect.Highlight(hit.collider.transform.position, highlightColour);
                     }
                     else
                     {
-                        Debug.Log("Out of range");
+                        targetEffect.StopHighlight();
+                    }
+
+                    //Rotate towards mouse pos
+                    pos = hit.point;
+
+                    Vector3 direction = pos - transform.position;
+                    Quaternion desiredRot = Quaternion.LookRotation(direction);
+
+                    desiredRot.x = transform.rotation.x;
+                    desiredRot.z = transform.rotation.z;
+
+                    transform.rotation = desiredRot;
+
+                    //On left click
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (distance <= preparedAction.range)
+                        {
+                            Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
+
+                            preparedAction.UseAction(this, pos, target);
+                            animController.SetTrigger("Attack");
+                        }
+                        else
+                        {
+                            Debug.Log("Out of range");
+                        }
                     }
                 }
+
+                #endregion
             }
-
-            return;
-        }
-
-        #endregion
-
-        #region Not Preparing Action
-
-        //On left click
-        if (Input.GetMouseButtonDown(0))
-        {
-            //Raycast from camera to mouse pos in world
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100, layerMask))
+            else
             {
-                //Set unit destination to mouse pos
-                pos = hit.point;
-                agent.SetDestination(pos);
+                #region Not Preparing Action
+
+                //On left click
+                if (Input.GetMouseButtonDown(0) && movementLeft > 0)
+                {
+                    //Raycast from camera to mouse pos in world
+                    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(ray, out hit, 100, layerMask))
+                    {
+                        //Set unit destination to mouse pos
+                        pos = hit.point;
+                        agent.SetDestination(pos);
+                    }
+                }
+
+                #endregion
+            }
+        }
+        else
+        {
+            StopMovement();
+        }
+        
+        bool moving = Vector3.Distance(transform.position, agent.destination) > 1f;
+        AnimateMove(moving);
+
+        if (moving)
+        {
+            endPos = transform.position;
+            float moved = Vector3.Distance(startPos, endPos);
+            movementLeft -= moved;
+            ActionPointsUI.instance.DisplayMovement(movementLeft / maxMovement);
+
+            if (movementLeft <= 0)
+            {
+                StopMovement();
             }
         }
 
-        AnimateMove(Vector3.Distance(transform.position, agent.destination) > 1f);
-
-        #endregion
+        startPos = endPos;
     }
 
     void AnimateMove(bool moving)
@@ -139,10 +159,16 @@ public class Controller : MonoBehaviour
     public int actionsLeft { get; private set; } = 0;
     int maxActions = 3;
 
+    public float movementLeft = 0;
+    public float maxMovement = 30;
+
     public void StartTurn()
     {
+        endPos = transform.position;
         actionsLeft = maxActions;
+        movementLeft = maxMovement;
         ActionPointsUI.instance.DisplayAP(actionsLeft);
+        ActionPointsUI.instance.DisplayMovement(movementLeft / maxMovement);
     }
 
     public void UseAP(int cost)

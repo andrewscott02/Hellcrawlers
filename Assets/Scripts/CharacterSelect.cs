@@ -37,6 +37,7 @@ public class CharacterSelect : MonoBehaviour
         availableCharacters[selectedCharacter].controlled = true;
         actionSelect.ActionList();
         ActionPointsUI.instance.DisplayAP(availableCharacters[selectedCharacter].actionsLeft);
+        ActionPointsUI.instance.DisplayMovement(availableCharacters[selectedCharacter].movementLeft/ availableCharacters[selectedCharacter].maxMovement);
 
         Invoke("ResetInput", 0.5f);
     }
