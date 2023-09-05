@@ -103,6 +103,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 754b9beaf42854b46b2702b0b9c2f902, type: 2}
   - {fileID: 11400000, guid: da4f12fe76dedde47bd014e7c5bdced2, type: 2}
   - {fileID: 11400000, guid: a1b07e59c3576374aa5ab91fa3e91409, type: 2}
+  movementLeft: 0
+  maxMovement: 20
 --- !u!195 &7913101807087728510
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -137,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95caadf68b6b80c428f993c6b01da438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armour: 10
+  armour: 15
 --- !u!1001 &214099439032951281
 PrefabInstance:
   m_ObjectHideFlags: 0
