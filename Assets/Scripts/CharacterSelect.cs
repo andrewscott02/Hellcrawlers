@@ -16,6 +16,9 @@ public class CharacterSelect : MonoBehaviour
 
     void Setup()
     {
+        foreach (var item in availableCharacters)
+            item.StartTurn();
+
         SelectCharacter(0);
     }
 
@@ -33,6 +36,7 @@ public class CharacterSelect : MonoBehaviour
 
         availableCharacters[selectedCharacter].controlled = true;
         actionSelect.ActionList();
+        ActionPointsUI.instance.DisplayAP(availableCharacters[selectedCharacter].actionsLeft);
 
         Invoke("ResetInput", 0.5f);
     }

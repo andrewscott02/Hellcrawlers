@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Controller : MonoBehaviour
 {
+    #region Setup
+
     public LayerMask layerMask = new LayerMask();
 
     public bool controlled = false;
@@ -23,6 +25,8 @@ public class Controller : MonoBehaviour
         animController = GetComponentInChildren<Animator>();
         targetEffect = GameObject.FindAnyObjectByType<TargetEffect>();
     }
+
+    #endregion
 
     public void Unselect()
     {
@@ -132,9 +136,26 @@ public class Controller : MonoBehaviour
     }
 
     Action preparedAction;
+    public int actionsLeft { get; private set; } = 0;
+    int maxActions = 3;
+
+    public void StartTurn()
+    {
+        actionsLeft = maxActions;
+        ActionPointsUI.instance.DisplayAP(actionsLeft);
+    }
+
+    public void UseAP(int cost)
+    {
+        actionsLeft -= cost;
+        ActionPointsUI.instance.DisplayAP(actionsLeft);
+    }
 
     public void PrepareAction(Action action)
     {
+        if (action != null)
+            if (action.cost > actionsLeft) return;
+
         targetEffect.StopHighlight();
         preparedAction = action;
         animController.SetBool("Aiming", preparedAction != null);

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Slash
   m_EditorClassIdentifier: 
   actionName: Slash
+  cost: 2
   castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
-  damage: 3
+  damage: 6
   changeArmour: 0
   range: 3
-  description: Hit a target for 3 damage
+  description: Hit a target for 6 damage

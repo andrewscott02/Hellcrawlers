@@ -6,6 +6,7 @@ using UnityEngine;
 public class Action : ScriptableObject
 {
     public string actionName;
+    public int cost;
     public Object castFX;
 
     public int damage = 0;
@@ -43,6 +44,7 @@ public class Action : ScriptableObject
         //TODO: Spawn fx at cast pos
         Instantiate(castFX, castPos, new Quaternion(0, 0, 0, 0));
 
+        character.UseAP(cost);
         character.PrepareAction(null);
     }
 }

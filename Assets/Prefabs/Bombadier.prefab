@@ -99,8 +99,10 @@ MonoBehaviour:
     m_Bits: 128
   controlled: 0
   cam: {fileID: 0}
-  defaultAttackAction: {fileID: 11400000, guid: 1d057477a80e760438c11dea9d6e5a59,
-    type: 2}
+  actions:
+  - {fileID: 11400000, guid: 1d057477a80e760438c11dea9d6e5a59, type: 2}
+  - {fileID: 11400000, guid: 1d057477a80e760438c11dea9d6e5a59, type: 2}
+  - {fileID: 11400000, guid: 1d057477a80e760438c11dea9d6e5a59, type: 2}
 --- !u!195 &440113201550094968
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -135,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95caadf68b6b80c428f993c6b01da438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armour: 5
+  armour: 10
 --- !u!1001 &6340396217466651731
 PrefabInstance:
   m_ObjectHideFlags: 0
