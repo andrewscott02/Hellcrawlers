@@ -55,8 +55,6 @@ MonoBehaviour:
   cam: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
-  - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
-  - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
   movementLeft: 0
   maxMovement: 20
 --- !u!195 &3777281427891379011

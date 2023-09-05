@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CharacterSelect : MonoBehaviour
 {
+    public CinemachineVirtualCamera vCam;
     ActionSelect actionSelect;
     int selectedCharacter;
     public Controller[] availableCharacters;
@@ -38,6 +40,8 @@ public class CharacterSelect : MonoBehaviour
         actionSelect.ActionList();
         ActionPointsUI.instance.DisplayAP(availableCharacters[selectedCharacter].actionsLeft);
         ActionPointsUI.instance.DisplayMovement(availableCharacters[selectedCharacter].movementLeft/ availableCharacters[selectedCharacter].maxMovement);
+
+        vCam.Follow = availableCharacters[selectedCharacter].transform;
 
         Invoke("ResetInput", 0.5f);
     }
