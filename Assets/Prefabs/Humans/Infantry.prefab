@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95caadf68b6b80c428f993c6b01da438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseArmour: 3
   armour: 3
 --- !u!114 &508964337635066981
 MonoBehaviour:
@@ -92,7 +93,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
   movementLeft: 0
   maxMovement: 15
-  playerCharacters: []
 --- !u!1 &3971383899357663336
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int armour = 5;
+    public int baseArmour = 5;
+    public int armour { get; private set; } = 5;
+
+    private void Start()
+    {
+        ResetArmour();
+    }
+
+    public void ResetArmour()
+    {
+        armour = baseArmour;
+    }
 
     public void Hit(int damage, int changeArmour = 0)
     {

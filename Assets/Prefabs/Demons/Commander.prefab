@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95caadf68b6b80c428f993c6b01da438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armour: 15
+  baseArmour: 15
 --- !u!1001 &214099439032951281
 PrefabInstance:
   m_ObjectHideFlags: 0
