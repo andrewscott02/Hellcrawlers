@@ -4,16 +4,31 @@ using UnityEngine;
 
 public class AIController : Controller
 {
-    public List<Controller> playerCharacters;
+    List<Controller> playerCharacters = new List<Controller>();
+
+    protected override void Start()
+    {
+        base.Start();
+        agent.destination = transform.position;
+
+        foreach (var item in GameObject.FindObjectsOfType<Controller>())
+        {
+            if (item is AIController == false)
+                playerCharacters.Add(item);
+        }
+    }
 
     // Update is called once per frame
     protected override void Update()
     {
-        bool moving = Vector3.Distance(transform.position, agent.destination) > 1f;
+        bool moving = false;
+        if (agent != null)
+            moving = Vector3.Distance(transform.position, agent.destination) > 1f;
         AnimateMove(moving);
 
         if (moving)
         {
+            distance = Vector3.Distance(transform.position, targetPos);
             endPos = transform.position;
             float moved = Vector3.Distance(startPos, endPos);
             movementLeft -= moved;
@@ -22,6 +37,7 @@ public class AIController : Controller
             if (movementLeft <= 0)
             {
                 StopMovement();
+                StopAllCoroutines();
             }
         }
 
@@ -33,6 +49,37 @@ public class AIController : Controller
         base.StartTurn();
 
         //TODO: AI considerations here
+        Controller target = DetermineTarget();
+        Action action = DetermineAction();
+
+        if (Vector3.Distance(transform.position, target.transform.position) < action.range)
+        {
+            //target within range now
+            action.UseAction(this, target.transform.position, target.GetComponent<Health>());
+            TurnFinished();
+        }
+        else
+        {
+            //movement gets within range
+            agent.SetDestination(target.transform.position);
+            StartCoroutine(IDelayAction(action, target));
+
+        }
+    }
+
+    Vector3 targetPos;
+    float distance = 0;
+
+    IEnumerator IDelayAction(Action action, Controller target)
+    {
+        yield return new WaitUntil(() => distance < action.range);
+        if (Vector3.Distance(transform.position, target.transform.position) < action.range)
+        {
+            //target within range now
+            action.UseAction(this, target.transform.position, target.GetComponent<Health>());
+        }
+        TurnFinished();
+        StopAllCoroutines();
     }
 
     public override void DisplayValues()
@@ -50,17 +97,24 @@ public class AIController : Controller
             float distance = Vector3.Distance(transform.position, item.transform.position);
             if (distance < closestDistance)
             {
-                closestCharacter = null;
+                closestCharacter = item;
                 closestDistance = distance;
             }
         }
 
+        Debug.Log(closestCharacter.gameObject.name);
         return closestCharacter;
     }
 
     Action DetermineAction()
     {
         //TODO:AI for actions
+        Debug.Log(actions[0].actionName);
         return actions[0];
+    }
+
+    void TurnFinished()
+    {
+        EndTurn.instance.EndEnmyTurn();
     }
 }

@@ -19,7 +19,7 @@ public class Controller : MonoBehaviour
 
     protected TargetEffect targetEffect;
 
-    private void Start()
+    protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animController = GetComponentInChildren<Animator>();

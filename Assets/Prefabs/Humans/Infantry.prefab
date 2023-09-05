@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3777281427891379008}
-  - component: {fileID: 3777281427891379010}
   - component: {fileID: 3777281427891379011}
   - component: {fileID: 3971383897340704321}
+  - component: {fileID: 508964337635066981}
   m_Layer: 0
   m_Name: Infantry
   m_TagString: Character
@@ -36,27 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &3777281427891379010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3777281427891379009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1acb93a4c7d7134ebccf36f3ce0296f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  controlled: 0
-  cam: {fileID: 0}
-  actions:
-  - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
-  movementLeft: 0
-  maxMovement: 20
 --- !u!195 &3777281427891379011
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -92,6 +71,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armour: 3
+--- !u!114 &508964337635066981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3777281427891379009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfbde71581c92e4ea4373eba7d14d5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  controlled: 0
+  cam: {fileID: 0}
+  actions:
+  - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
+  movementLeft: 0
+  maxMovement: 15
+  playerCharacters: []
 --- !u!1 &3971383899357663336
 GameObject:
   m_ObjectHideFlags: 0

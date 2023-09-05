@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EndTurn : MonoBehaviour
 {
+    public static EndTurn instance;
+
     bool playerTurn = false;
     public List<Controller> playerCharacters;
 
     private void Start()
     {
+        instance = this;
         StartPlayerTurn();
     }
 
@@ -21,8 +24,7 @@ public class EndTurn : MonoBehaviour
         if (!playerTurn) return;
         playerTurn = false;
 
-        //TODO: Start enemy turn
-        StartPlayerTurn(); //TODO: Remove, call elsewhere
+        StartEnemyTurns();
     }
 
     public void StartPlayerTurn()
@@ -33,6 +35,30 @@ public class EndTurn : MonoBehaviour
         }
 
         playerTurn = true;
+    }
+
+    int enemyCount = 0;
+
+    void StartEnemyTurns()
+    {
+        AIController[] enemies = GameObject.FindObjectsOfType<AIController>();
+
+        enemyCount = enemies.Length;
+
+        foreach(var item in enemies)
+        {
+            item.StartTurn();
+        }
+    }
+
+    public void EndEnmyTurn()
+    {
+        enemyCount--;
+
+        if (enemyCount <= 0)
+        {
+            StartPlayerTurn();
+        }
     }
 
     void ResetInput()
