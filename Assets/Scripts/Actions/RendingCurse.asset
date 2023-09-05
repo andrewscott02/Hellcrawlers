@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: RendingCurse
   m_EditorClassIdentifier: 
   actionName: Rending Curse
-  cost: 1
+  apCost: 0
+  moveCost: 0
   castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
   damage: 1
   changeArmour: -2
+  changeMovement: 0
   range: 20
   description: Reduce target's armour by 2 and hit target for 1 damage

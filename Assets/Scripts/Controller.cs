@@ -11,13 +11,13 @@ public class Controller : MonoBehaviour
 
     public bool controlled = false;
     public Camera cam;
-    NavMeshAgent agent;
-    Animator animController;
+    protected NavMeshAgent agent;
+    protected Animator animController;
     public Action[] actions;
 
-    Vector3 pos;
+    protected Vector3 pos;
 
-    TargetEffect targetEffect;
+    protected TargetEffect targetEffect;
 
     private void Start()
     {
@@ -38,11 +38,11 @@ public class Controller : MonoBehaviour
         targetEffect.StopHighlight();
     }
 
-    Vector3 startPos;
-    Vector3 endPos;
+    protected Vector3 startPos;
+    protected Vector3 endPos;
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (controlled && InputManager.inputAvailable)
         {
@@ -138,8 +138,8 @@ public class Controller : MonoBehaviour
         {
             endPos = transform.position;
             float moved = Vector3.Distance(startPos, endPos);
-            movementLeft -= moved;
-            ActionPointsUI.instance.DisplayMovement(movementLeft / maxMovement);
+            UseMovement(moved);
+            DisplayValues();
 
             if (movementLeft <= 0)
             {
@@ -150,7 +150,7 @@ public class Controller : MonoBehaviour
         startPos = endPos;
     }
 
-    void AnimateMove(bool moving)
+    protected void AnimateMove(bool moving)
     {
         animController.SetBool("Moving", moving);
     }
@@ -162,25 +162,36 @@ public class Controller : MonoBehaviour
     public float movementLeft = 0;
     public float maxMovement = 30;
 
-    public void StartTurn()
+    public virtual void StartTurn()
     {
         endPos = transform.position;
         actionsLeft = maxActions;
         movementLeft = maxMovement;
-        ActionPointsUI.instance.DisplayAP(actionsLeft);
-        ActionPointsUI.instance.DisplayMovement(movementLeft / maxMovement);
+        DisplayValues();
     }
 
     public void UseAP(int cost)
     {
         actionsLeft -= cost;
+        DisplayValues();
+    }
+
+    public void UseMovement(float cost)
+    {
+        movementLeft -= cost;
+        DisplayValues();
+    }
+
+    public virtual void DisplayValues()
+    {
         ActionPointsUI.instance.DisplayAP(actionsLeft);
+        ActionPointsUI.instance.DisplayMovement(movementLeft / maxMovement);
     }
 
     public void PrepareAction(Action action)
     {
         if (action != null)
-            if (action.cost > actionsLeft) return;
+            if (action.apCost > actionsLeft || (action.moveCost > movementLeft && action.moveCost > 0)) return;
 
         targetEffect.StopHighlight();
         preparedAction = action;

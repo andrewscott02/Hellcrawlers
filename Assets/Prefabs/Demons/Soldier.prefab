@@ -102,7 +102,8 @@ MonoBehaviour:
   actions:
   - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
   - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
-  - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
+  - {fileID: 11400000, guid: dbbb4e670100fa8468ad7b0d81a92623, type: 2}
+  - {fileID: 11400000, guid: 05c3b70113d4ca149b771b9d69bd300b, type: 2}
   movementLeft: 0
   maxMovement: 20
 --- !u!195 &249573674997918906

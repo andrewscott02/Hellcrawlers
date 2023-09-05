@@ -6,11 +6,13 @@ using UnityEngine;
 public class Action : ScriptableObject
 {
     public string actionName;
-    public int cost;
+    public int apCost;
+    public float moveCost;
     public Object castFX;
 
     public int damage = 0;
     public int changeArmour = 0;
+    public int changeMovement = 0;
     public float range = 20;
 
     [TextArea(3, 10)]
@@ -44,7 +46,8 @@ public class Action : ScriptableObject
         //TODO: Spawn fx at cast pos
         Instantiate(castFX, castPos, new Quaternion(0, 0, 0, 0));
 
-        character.UseAP(cost);
+        character.UseAP(apCost);
+        character.UseMovement(moveCost - changeMovement);
         character.PrepareAction(null);
     }
 }
