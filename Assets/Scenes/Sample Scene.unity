@@ -916,6 +916,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Infantry (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3777281427891379009, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3777281427891379010, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: cam
@@ -1231,6 +1236,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Infantry (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777281427891379009, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3777281427891379010, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
@@ -1728,6 +1738,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Infantry (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3777281427891379009, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3777281427891379010, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: cam
@@ -1885,6 +1900,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SuperSoldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436190638894581075, guid: 79c526fc82cc9584b89e0bb027bc3633,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79c526fc82cc9584b89e0bb027bc3633, type: 3}
@@ -3670,6 +3690,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Infantry (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3777281427891379009, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3777281427891379010, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: cam
@@ -3743,6 +3768,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Infantry (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3777281427891379009, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3777281427891379010, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
@@ -4518,6 +4548,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Infantry (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3777281427891379009, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3777281427891379010, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: cam
@@ -4946,6 +4981,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SuperSoldier (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436190638894581075, guid: 79c526fc82cc9584b89e0bb027bc3633,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79c526fc82cc9584b89e0bb027bc3633, type: 3}
@@ -5490,6 +5530,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Infantry
       objectReference: {fileID: 0}
+    - target: {fileID: 3777281427891379009, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3777281427891379010, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: cam
@@ -5568,6 +5613,12 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1403453645}
+    - target: {fileID: 2153480737996290994, guid: e2ed034b96d433b45866591a7dae8c5a,
+        type: 3}
+      propertyPath: actions.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b00a5e088989f944fbb09147f2b05eaa,
+        type: 2}
     - target: {fileID: 7495904832665377792, guid: e2ed034b96d433b45866591a7dae8c5a,
         type: 3}
       propertyPath: m_Name

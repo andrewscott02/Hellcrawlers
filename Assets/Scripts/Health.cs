@@ -43,27 +43,42 @@ public class Health : MonoBehaviour
 
     #region Statuses
 
-    List<StatusEffect> statuses = new List<StatusEffect>();
+    Dictionary<StatusEffect, int> statuses = new Dictionary<StatusEffect, int>();
     public delegate void StatusDelegates(Health target);
     public StatusDelegates OnHit;
 
     public bool ApplyStatus(StatusEffect status)
     {
-        if (statuses.Contains(status)) return false;
+        if (statuses.ContainsKey(status)) return false;
 
-        statuses.Add(status);
+        statuses.Add(status, 0);
 
         return true;
     }
 
     public void ClearStatuses()
     {
-        foreach(var item in statuses)
+        if (statuses == null || statuses.Count <= 0) return;
+
+        Dictionary<StatusEffect, int> newStatuses = new Dictionary<StatusEffect, int>();
+
+        foreach (var item in statuses)
         {
-            item.RemoveStatus(this);
+            if (item.Key != null)
+            {
+                if (item.Key.duration > item.Value)
+                {
+                    //keep, increase duration
+                    newStatuses.Add(item.Key, item.Value+1);
+                }
+                else
+                {
+                    item.Key.RemoveStatus(this);
+                }
+            }
         }
 
-        statuses.Clear();
+        statuses = newStatuses;
     }
 
     public float GetDamageScaling()
@@ -72,7 +87,7 @@ public class Health : MonoBehaviour
 
         foreach (var item in statuses)
         {
-            damageScaling += item.damageScaling;
+            damageScaling += item.Key.damageScaling;
         }
 
         return damageScaling;

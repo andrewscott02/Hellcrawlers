@@ -52,6 +52,7 @@ public class Action : ScriptableObject
 
             //Apply logic for action
             int trueDamage = (int)((damage + (armourScaling * casterHealth.armour)) * casterHealth.GetDamageScaling());
+            message += " for " + trueDamage;
             target.Hit(trueDamage, changeArmour);
 
             foreach(var item in statuses)

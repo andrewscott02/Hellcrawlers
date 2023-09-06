@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NeStatus", menuName = "Units/Status", order = 1)]
 public class StatusEffect : ScriptableObject
 {
+    public int duration = 0;
     public int armourOnHit;
     public float damageScaling;
 

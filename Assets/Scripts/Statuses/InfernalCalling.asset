@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823b8ee7355f872449d5a9a53cc6169c, type: 3}
   m_Name: InfernalCalling
   m_EditorClassIdentifier: 
+  duration: 0
   armourOnHit: 0
   damageScaling: 0.5
