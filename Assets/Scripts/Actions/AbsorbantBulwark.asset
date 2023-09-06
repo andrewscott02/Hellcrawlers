@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AbsorbantBulwark
   m_EditorClassIdentifier: 
   actionName: Absorbant Bulwark
+  selfOnly: 1
   apCost: 1
   moveCost: 0
   resetArmour: 0
@@ -22,6 +23,8 @@ MonoBehaviour:
   changeArmour: 5
   changeMovement: 0
   range: 1
+  statuses:
+  - {fileID: 11400000, guid: 5e2f0e929baae6d448b349c928e7c293, type: 2}
   description: 'Gain 3 armour
 
 

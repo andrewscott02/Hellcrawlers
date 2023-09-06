@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DefensiveRush
   m_EditorClassIdentifier: 
   actionName: Defensive Rush
+  selfOnly: 1
   apCost: 1
   moveCost: 0
   resetArmour: 0
@@ -22,4 +23,5 @@ MonoBehaviour:
   changeArmour: 3
   changeMovement: 10
   range: 1
+  statuses: []
   description: "Gain 10 movement \n\nGain 5 armour"

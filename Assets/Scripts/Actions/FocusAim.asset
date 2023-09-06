@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: FocusAim
   m_EditorClassIdentifier: 
   actionName: Focus Aim
+  selfOnly: 1
   apCost: 1
   moveCost: 15
+  resetArmour: 0
   castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
   damage: 0
+  armourScaling: 0
   changeArmour: 0
   changeMovement: 0
   range: 1
+  statuses: []
   description: Use 15 of your movement to double your damage this turn

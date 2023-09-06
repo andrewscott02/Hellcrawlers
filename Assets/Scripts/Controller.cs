@@ -19,8 +19,11 @@ public class Controller : MonoBehaviour
 
     protected TargetEffect targetEffect;
 
+    protected Health health;
+
     protected virtual void Start()
     {
+        health = GetComponent<Health>();
         agent = GetComponent<NavMeshAgent>();
         animController = GetComponentInChildren<Animator>();
         targetEffect = GameObject.FindAnyObjectByType<TargetEffect>();
@@ -54,50 +57,64 @@ public class Controller : MonoBehaviour
             {
                 #region Preparing Action
 
-                //Rotate to mouse pos
-                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, 100, layerMask))
+                if (preparedAction.selfOnly)
                 {
-                    float distance = Vector3.Distance(gameObject.transform.position, hit.point);
-
-                    Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag);
-                    if (hit.collider.tag == "Character")
-                    {
-                        distance = Vector3.Distance(gameObject.transform.position, hit.collider.transform.position);
-                        Color highlightColour = distance <= preparedAction.range ? Color.green : Color.red;
-                        targetEffect.Highlight(hit.collider.transform.position, highlightColour);
-                    }
-                    else
-                    {
-                        targetEffect.StopHighlight();
-                    }
-
-                    //Rotate towards mouse pos
-                    pos = hit.point;
-
-                    Vector3 direction = pos - transform.position;
-                    Quaternion desiredRot = Quaternion.LookRotation(direction);
-
-                    desiredRot.x = transform.rotation.x;
-                    desiredRot.z = transform.rotation.z;
-
-                    transform.rotation = desiredRot;
+                    targetEffect.Highlight(transform.position, Color.green);
 
                     //On left click
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if (distance <= preparedAction.range)
-                        {
-                            Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
+                        preparedAction.UseAction(this, pos, health);
+                        animController.SetTrigger("Attack");
+                    }
+                }
+                else
+                {
+                    //Rotate to mouse pos
+                    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
 
-                            preparedAction.UseAction(this, pos, target);
-                            animController.SetTrigger("Attack");
+                    if (Physics.Raycast(ray, out hit, 100, layerMask))
+                    {
+                        float distance = Vector3.Distance(gameObject.transform.position, hit.point);
+
+                        Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag);
+                        if (hit.collider.tag == "Character")
+                        {
+                            distance = Vector3.Distance(gameObject.transform.position, hit.collider.transform.position);
+                            Color highlightColour = distance <= preparedAction.range ? Color.green : Color.red;
+                            targetEffect.Highlight(hit.collider.transform.position, highlightColour);
                         }
                         else
                         {
-                            Debug.Log("Out of range");
+                            targetEffect.StopHighlight();
+                        }
+
+                        //Rotate towards mouse pos
+                        pos = hit.point;
+
+                        Vector3 direction = pos - transform.position;
+                        Quaternion desiredRot = Quaternion.LookRotation(direction);
+
+                        desiredRot.x = transform.rotation.x;
+                        desiredRot.z = transform.rotation.z;
+
+                        transform.rotation = desiredRot;
+
+                        //On left click
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            if (distance <= preparedAction.range)
+                            {
+                                Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
+
+                                preparedAction.UseAction(this, pos, target);
+                                animController.SetTrigger("Attack");
+                            }
+                            else
+                            {
+                                Debug.Log("Out of range");
+                            }
                         }
                     }
                 }
@@ -167,6 +184,8 @@ public class Controller : MonoBehaviour
         endPos = transform.position;
         actionsLeft = maxActions;
         movementLeft = maxMovement;
+        if (health == null) health = GetComponent<Health>();
+        health.ClearStatuses();
         DisplayValues();
     }
 

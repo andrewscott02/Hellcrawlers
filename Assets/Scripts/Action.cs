@@ -6,6 +6,7 @@ using UnityEngine;
 public class Action : ScriptableObject
 {
     public string actionName;
+    public bool selfOnly = false;
     public int apCost;
     public float moveCost;
     public bool resetArmour;
@@ -16,6 +17,8 @@ public class Action : ScriptableObject
     public int changeArmour = 0;
     public int changeMovement = 0;
     public float range = 20;
+
+    public StatusEffect[] statuses;
 
     [TextArea(3, 10)]
     public string description;
@@ -36,19 +39,30 @@ public class Action : ScriptableObject
 
         Health casterHealth = character.GetComponent<Health>();
 
+        if (selfOnly)
+        {
+            target = casterHealth;
+            castPos = character.transform.position;
+        }
+
         if (target != null)
         {
             message += " on " + target.gameObject.name;
             castPos = target.transform.position;
 
-            //TODO: Apply logic for action
+            //Apply logic for action
             int trueDamage = damage + (armourScaling * casterHealth.armour);
             target.Hit(trueDamage, changeArmour);
+
+            foreach(var item in statuses)
+            {
+                item.ApplyStatus(target);
+            }
         }
 
         Debug.Log(message);
 
-        //TODO: Spawn fx at cast pos
+        //Spawn fx at cast pos
         Instantiate(castFX, castPos, new Quaternion(0, 0, 0, 0));
 
         if (resetArmour)
