@@ -51,7 +51,7 @@ public class Action : ScriptableObject
             castPos = target.transform.position;
 
             //Apply logic for action
-            int trueDamage = damage + (armourScaling * casterHealth.armour);
+            int trueDamage = (int)((damage + (armourScaling * casterHealth.armour)) * casterHealth.GetDamageScaling());
             target.Hit(trueDamage, changeArmour);
 
             foreach(var item in statuses)

@@ -6,13 +6,15 @@ using UnityEngine;
 public class StatusEffect : ScriptableObject
 {
     public int armourOnHit;
+    public float damageScaling;
 
     public void ApplyStatus(Health target)
     {
-        target.ApplyStatus(this);
-
-        target.OnHit += OnHit;
-        Debug.Log("Added delegate");
+        if (target.ApplyStatus(this))
+        {
+            target.OnHit += OnHit;
+            Debug.Log("Added delegate");
+        }
     }
 
     public void RemoveStatus(Health target)

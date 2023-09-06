@@ -23,5 +23,6 @@ MonoBehaviour:
   changeArmour: 0
   changeMovement: 0
   range: 1
-  statuses: []
+  statuses:
+  - {fileID: 11400000, guid: 27120592d3959ec43a2e043b1e5b3ab3, type: 2}
   description: Use 15 of your movement to double your damage this turn

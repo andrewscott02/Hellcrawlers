@@ -47,11 +47,13 @@ public class Health : MonoBehaviour
     public delegate void StatusDelegates(Health target);
     public StatusDelegates OnHit;
 
-    public void ApplyStatus(StatusEffect status)
+    public bool ApplyStatus(StatusEffect status)
     {
-        if (statuses.Contains(status)) return;
+        if (statuses.Contains(status)) return false;
 
         statuses.Add(status);
+
+        return true;
     }
 
     public void ClearStatuses()
@@ -62,6 +64,18 @@ public class Health : MonoBehaviour
         }
 
         statuses.Clear();
+    }
+
+    public float GetDamageScaling()
+    {
+        float damageScaling = 1;
+
+        foreach (var item in statuses)
+        {
+            damageScaling += item.damageScaling;
+        }
+
+        return damageScaling;
     }
 
     #endregion
