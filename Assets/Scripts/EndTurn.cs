@@ -6,7 +6,7 @@ public class EndTurn : MonoBehaviour
 {
     public static EndTurn instance;
 
-    bool playerTurn = false;
+    public static bool playerTurn = false;
     public List<Controller> playerCharacters;
 
     private void Start()
@@ -17,6 +17,8 @@ public class EndTurn : MonoBehaviour
 
     public void ButtonPressed()
     {
+        if (!EndTurn.playerTurn) return;
+
         InputManager.inputAvailable = false;
 
         Invoke("ResetInput", 0.5f);

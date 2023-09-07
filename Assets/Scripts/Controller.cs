@@ -47,7 +47,7 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (controlled && InputManager.inputAvailable)
+        if (controlled && InputManager.inputAvailable && EndTurn.playerTurn)
         {
             if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Backspace) || Input.GetMouseButtonDown(1))
                 PrepareAction(null);
@@ -169,10 +169,11 @@ public class Controller : MonoBehaviour
 
     protected void AnimateMove(bool moving)
     {
-        animController.SetBool("Moving", moving);
+        if (animController != null)
+            animController.SetBool("Moving", moving);
     }
 
-    Action preparedAction;
+    protected Action preparedAction;
     public int actionsLeft { get; private set; } = 0;
     int maxActions = 3;
 
@@ -183,8 +184,8 @@ public class Controller : MonoBehaviour
     {
         endPos = transform.position;
         actionsLeft = maxActions;
-        movementLeft = maxMovement;
         if (health == null) health = GetComponent<Health>();
+        movementLeft = maxMovement * health.GetMovementScaling();
         health.ClearStatuses();
         DisplayValues();
     }
@@ -215,7 +216,8 @@ public class Controller : MonoBehaviour
 
         targetEffect.StopHighlight();
         preparedAction = action;
-        animController.SetBool("Aiming", preparedAction != null);
+        if (animController != null)
+            animController.SetBool("Aiming", preparedAction != null);
         if (preparedAction != null)
             StopMovement();
     }

@@ -69,7 +69,8 @@ public class Action : ScriptableObject
         Instantiate(castFX, castPos, new Quaternion(0, 0, 0, 0));
 
         //Animation
-        character.animController.SetTrigger(castAnimation.ToString());
+        if (character.animController != null)
+            character.animController.SetTrigger(castAnimation.ToString());
 
         if (resetArmour)
             character.GetComponent<Health>().ResetArmour();

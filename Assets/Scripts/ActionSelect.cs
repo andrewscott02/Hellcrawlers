@@ -26,6 +26,8 @@ public class ActionSelect : MonoBehaviour
 
     public void SelectAction(int index)
     {
+        if (!EndTurn.playerTurn) return;
+
         InputManager.inputAvailable = false;
 
         characterSelect.GetSelectedCharacter().PrepareAction(actions[index]);

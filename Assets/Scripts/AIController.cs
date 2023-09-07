@@ -50,20 +50,20 @@ public class AIController : Controller
 
         //TODO: AI considerations here
         Controller target = DetermineTarget();
-        Action action = DetermineAction(target);
+        preparedAction = DetermineAction(target);
 
-        if (Vector3.Distance(transform.position, target.transform.position) < action.range)
+        if (Vector3.Distance(transform.position, target.transform.position) < preparedAction.range)
         {
             //target within range now
-            action.UseAction(this, target.transform.position, target.GetComponent<Health>());
+            preparedAction.UseAction(this, target.transform.position, target.GetComponent<Health>());
             TurnFinished();
         }
         else
         {
             //movement gets within range
-            agent.SetDestination(target.transform.position);
-            StartCoroutine(IDelayAction(action, target));
-
+            targetPos = target.transform.position;
+            agent.SetDestination(targetPos);
+            StartCoroutine(IDelayAction(preparedAction, target));
         }
     }
 
@@ -72,12 +72,13 @@ public class AIController : Controller
 
     IEnumerator IDelayAction(Action action, Controller target)
     {
-        yield return new WaitUntil(() => distance < action.range);
+        yield return new WaitUntil(() => (Vector3.Distance(transform.position, target.transform.position) < action.range) || movementLeft <= 0);
         if (Vector3.Distance(transform.position, target.transform.position) < action.range)
         {
             //target within range now
             action.UseAction(this, target.transform.position, target.GetComponent<Health>());
         }
+        StopMovement();
         TurnFinished();
         StopAllCoroutines();
     }
@@ -115,19 +116,33 @@ public class AIController : Controller
 
         foreach(var item in actions)
         {
-            float priority = 0;
-            if (item.damage >= targetHealth.armour)
+            float priority = Mathf.NegativeInfinity;
+            
+            if (Vector3.Distance(transform.position, target.transform.position) < item.range + movementLeft)
             {
-                priority += Mathf.Infinity;
-            }
-            else
-            {
-                priority += item.damage * 0.2f;
-                priority -= item.changeArmour;
-                priority += item.statuses.Length * 10;
+                priority = 0;
+
+                if (item.damage >= targetHealth.armour)
+                {
+                    priority += Mathf.Infinity;
+                }
+                else
+                {
+                    priority += item.damage * 0.2f;
+                    priority -= item.changeArmour;
+
+                    foreach (var status in item.statuses)
+                    {
+                        if (!targetHealth.statuses.ContainsKey(status))
+                        {
+                            Debug.Log("Doesn't contain status " + status.name);
+                            priority += 10;
+                        }
+                    }
+                }
             }
 
-            if (priority >= highestPriority)
+            if (priority > highestPriority)
             {
                 bestSpell = item;
                 highestPriority = priority;
@@ -135,8 +150,8 @@ public class AIController : Controller
         }
 
         //TODO:AI for actions
-        Debug.Log(actions[0].actionName);
-        return actions[0];
+        Debug.Log(bestSpell.actionName);
+        return bestSpell;
     }
 
     void TurnFinished()

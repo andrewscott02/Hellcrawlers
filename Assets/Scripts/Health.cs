@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
 
     #region Statuses
 
-    Dictionary<StatusEffect, int> statuses = new Dictionary<StatusEffect, int>();
+    public Dictionary<StatusEffect, int> statuses { get; private set; } = new Dictionary<StatusEffect, int>();
     public delegate void StatusDelegates(Health target);
     public StatusDelegates OnHit;
 
@@ -91,6 +91,18 @@ public class Health : MonoBehaviour
         }
 
         return damageScaling;
+    }
+
+    public float GetMovementScaling()
+    {
+        float moveScaling = 1;
+
+        foreach (var item in statuses)
+        {
+            moveScaling += item.Key.moveScaling;
+        }
+
+        return moveScaling;
     }
 
     #endregion

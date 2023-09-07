@@ -26,6 +26,8 @@ public class CharacterSelect : MonoBehaviour
 
     public void SelectCharacter(int index)
     {
+        if (!EndTurn.playerTurn) return;
+
         InputManager.inputAvailable = false;
 
         selectedCharacter = index;

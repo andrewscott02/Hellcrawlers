@@ -8,6 +8,7 @@ public class StatusEffect : ScriptableObject
     public int duration = 0;
     public int armourOnHit;
     public float damageScaling;
+    public float moveScaling;
 
     public void ApplyStatus(Health target)
     {
