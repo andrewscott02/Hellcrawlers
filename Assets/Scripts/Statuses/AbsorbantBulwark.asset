@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AbsorbantBulwark
   m_EditorClassIdentifier: 
   duration: 0
-  armourOnHit: 2
+  armourOnHit: 1
   damageScaling: 0

@@ -18,6 +18,8 @@ public class Action : ScriptableObject
     public int changeMovement = 0;
     public float range = 20;
 
+    public Animations castAnimation = Animations.Attack;
+
     public StatusEffect[] statuses;
 
     [TextArea(3, 10)]
@@ -66,6 +68,9 @@ public class Action : ScriptableObject
         //Spawn fx at cast pos
         Instantiate(castFX, castPos, new Quaternion(0, 0, 0, 0));
 
+        //Animation
+        character.animController.SetTrigger(castAnimation.ToString());
+
         if (resetArmour)
             character.GetComponent<Health>().ResetArmour();
 
@@ -74,4 +79,9 @@ public class Action : ScriptableObject
 
         character.PrepareAction(null);
     }
+}
+
+public enum Animations
+{
+    Attack, Cast
 }

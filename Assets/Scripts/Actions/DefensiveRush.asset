@@ -23,5 +23,6 @@ MonoBehaviour:
   changeArmour: 3
   changeMovement: 10
   range: 1
+  castAnimation: 1
   statuses: []
   description: "Gain 10 movement \n\nGain 5 armour"

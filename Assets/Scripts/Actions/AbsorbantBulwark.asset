@@ -23,10 +23,11 @@ MonoBehaviour:
   changeArmour: 5
   changeMovement: 0
   range: 1
+  castAnimation: 1
   statuses:
   - {fileID: 11400000, guid: 5e2f0e929baae6d448b349c928e7c293, type: 2}
   description: 'Gain 3 armour
 
 
     For every hit you take until the start of your
-    next turn, you gain 2 armour'
+    next turn, you gain 1 armour'

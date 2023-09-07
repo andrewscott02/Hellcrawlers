@@ -50,7 +50,7 @@ public class AIController : Controller
 
         //TODO: AI considerations here
         Controller target = DetermineTarget();
-        Action action = DetermineAction();
+        Action action = DetermineAction(target);
 
         if (Vector3.Distance(transform.position, target.transform.position) < action.range)
         {
@@ -106,8 +106,34 @@ public class AIController : Controller
         return closestCharacter;
     }
 
-    Action DetermineAction()
+    Action DetermineAction(Controller target)
     {
+        Health targetHealth = target.GetComponent<Health>();
+
+        Action bestSpell = null;
+        float highestPriority = Mathf.NegativeInfinity;
+
+        foreach(var item in actions)
+        {
+            float priority = 0;
+            if (item.damage >= targetHealth.armour)
+            {
+                priority += Mathf.Infinity;
+            }
+            else
+            {
+                priority += item.damage * 0.2f;
+                priority -= item.changeArmour;
+                priority += item.statuses.Length * 10;
+            }
+
+            if (priority >= highestPriority)
+            {
+                bestSpell = item;
+                highestPriority = priority;
+            }
+        }
+
         //TODO:AI for actions
         Debug.Log(actions[0].actionName);
         return actions[0];

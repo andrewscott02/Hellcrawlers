@@ -12,7 +12,7 @@ public class Controller : MonoBehaviour
     public bool controlled = false;
     public Camera cam;
     protected NavMeshAgent agent;
-    protected Animator animController;
+    public Animator animController { get; protected set; }
     public Action[] actions;
 
     protected Vector3 pos;
@@ -198,6 +198,7 @@ public class Controller : MonoBehaviour
     public void UseMovement(float cost)
     {
         movementLeft -= cost;
+        movementLeft = movementLeft < 0 ? 0 : movementLeft;
         DisplayValues();
     }
 

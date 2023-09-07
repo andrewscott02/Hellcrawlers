@@ -23,6 +23,7 @@ MonoBehaviour:
   changeArmour: 0
   changeMovement: 0
   range: 10
+  castAnimation: 1
   statuses:
   - {fileID: 11400000, guid: e7cfc07566461fc4a99c951c643af73a, type: 2}
   description: Increase an ally's damage by 50% this turn

@@ -23,5 +23,6 @@ MonoBehaviour:
   changeArmour: 0
   changeMovement: 15
   range: 1
+  castAnimation: 1
   statuses: []
   description: Gain 15 movement
