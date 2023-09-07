@@ -178,6 +178,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone
       objectReference: {fileID: 0}
+    - target: {fileID: 3971383897340704321, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: baseArmour
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082540650868095283, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7954147847025481887, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: m_IsActive

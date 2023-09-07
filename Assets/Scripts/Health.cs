@@ -5,10 +5,22 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int baseArmour = 5;
-    public int armour { get; private set; } = 5;
+    private int _armour = 5;
+    public int armour
+    {
+        get => _armour;
+        set
+        {
+            _armour = value;
+            if (armourUI != null) armourUI.UpdateArmourUI(value);
+        }
+    }
+
+    ArmourUI armourUI;
 
     private void Start()
     {
+        armourUI = GetComponentInChildren<ArmourUI>();
         ResetArmour();
     }
 
