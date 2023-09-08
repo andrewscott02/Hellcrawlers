@@ -26,7 +26,8 @@ public class Health : MonoBehaviour
 
     public void ResetArmour()
     {
-        armour = baseArmour;
+        if (armour > baseArmour)
+            armour = baseArmour;
     }
 
     public void Hit(int damage, int changeArmour = 0, bool ignoreHit = false)

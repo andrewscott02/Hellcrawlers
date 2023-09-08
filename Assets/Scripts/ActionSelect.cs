@@ -35,6 +35,16 @@ public class ActionSelect : MonoBehaviour
         Invoke("ResetInput", 0.5f);
     }
 
+    public void ShowAction(int index)
+    {
+        ActionUI.instance.ShowActionInfo(actions[index]);
+    }
+
+    public void HideAction()
+    {
+        ActionUI.instance.HideActionInfo();
+    }
+
     void ResetInput()
     {
         InputManager.inputAvailable = true;
