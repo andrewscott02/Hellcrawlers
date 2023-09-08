@@ -26,9 +26,29 @@ public class AIController : Controller
             moving = Vector3.Distance(transform.position, agent.destination) > 1f;
         AnimateMove(moving);
 
+        if (target != null && preparedAction != null)
+        {
+            bool lineOfSight = false;
+            RaycastHit perspectiveInfo;
+            Vector3 lineOfSightOrigin = transform.position;
+            lineOfSightOrigin.y += 2;
+
+            if (Physics.Linecast(lineOfSightOrigin, target.transform.position, out perspectiveInfo))
+            {
+                if (perspectiveInfo.collider.GetComponentInParent<Health>() != null)
+                {
+                    Debug.Log("Line of Sight: " + target.gameObject.name + " | " + perspectiveInfo.collider.GetComponentInParent<Health>().gameObject.name);
+                    lineOfSight = target.gameObject == perspectiveInfo.collider.GetComponentInParent<Health>().gameObject;
+                }
+            }
+
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+            bool inRange = distance <= preparedAction.range;
+            canHit = inRange && lineOfSight;
+        }
+
         if (moving)
         {
-            distance = Vector3.Distance(transform.position, targetPos);
             endPos = transform.position;
             float moved = Vector3.Distance(startPos, endPos);
             movementLeft -= moved;
@@ -37,7 +57,6 @@ public class AIController : Controller
             if (movementLeft <= 0)
             {
                 StopMovement();
-                StopAllCoroutines();
             }
         }
 
@@ -48,36 +67,65 @@ public class AIController : Controller
     {
         base.StartTurn();
 
-        //TODO: AI considerations here
-        Controller target = DetermineTarget();
+        takingTurn = true;
+
+        canHit = false;
+
+        //AI considerations
+        target = DetermineTarget();
         preparedAction = DetermineAction(target);
 
-        if (Vector3.Distance(transform.position, target.transform.position) < preparedAction.range)
+        Debug.Log(gameObject.name + " is starting turn with " + movementLeft + " and planning to use " + preparedAction.name + " on " + target);
+
+        targetPos = target.transform.position;
+        agent.SetDestination(targetPos);
+        StartCoroutine(IDelayAction());
+    }
+
+    public bool takingTurn = false;
+    Controller target;
+    Vector3 targetPos;
+    bool canHit = false;
+
+    IEnumerator IDelayAction()
+    {
+        yield return new WaitUntil(() => canHit || movementLeft <= 0);
+
+        if (canHit)
         {
             //target within range now
+            Debug.Log(gameObject.name + " is ending turn using: " + preparedAction.actionName);
             preparedAction.UseAction(this, target.transform.position, target.GetComponent<Health>());
-            TurnFinished();
         }
         else
         {
-            //movement gets within range
-            targetPos = target.transform.position;
-            agent.SetDestination(targetPos);
-            StartCoroutine(IDelayAction(preparedAction, target));
-        }
-    }
+            Debug.Log(gameObject.name + " is ending turn, doing nothing");
+            preparedAction = DetermineAction(target);
+            bool lineOfSight = false;
+            RaycastHit perspectiveInfo;
+            Vector3 lineOfSightOrigin = transform.position;
+            lineOfSightOrigin.y += 2;
 
-    Vector3 targetPos;
-    float distance = 0;
+            if (Physics.Linecast(lineOfSightOrigin, target.transform.position, out perspectiveInfo))
+            {
+                if (perspectiveInfo.collider.GetComponentInParent<Health>() != null)
+                {
+                    Debug.Log("Line of Sight: " + target.gameObject.name + " | " + perspectiveInfo.collider.GetComponentInParent<Health>().gameObject.name);
+                    lineOfSight = target.gameObject == perspectiveInfo.collider.GetComponentInParent<Health>().gameObject;
+                }
+            }
 
-    IEnumerator IDelayAction(Action action, Controller target)
-    {
-        yield return new WaitUntil(() => (Vector3.Distance(transform.position, target.transform.position) < action.range) || movementLeft <= 0);
-        if (Vector3.Distance(transform.position, target.transform.position) < action.range)
-        {
-            //target within range now
-            action.UseAction(this, target.transform.position, target.GetComponent<Health>());
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+            bool inRange = distance <= preparedAction.range;
+            canHit = inRange && lineOfSight;
+            if (canHit)
+            {
+                //target within range now
+                Debug.Log(gameObject.name + " is ending turn using: " + preparedAction.actionName);
+                preparedAction.UseAction(this, target.transform.position, target.GetComponent<Health>());
+            }
         }
+
         StopMovement();
         TurnFinished();
         StopAllCoroutines();
@@ -156,6 +204,22 @@ public class AIController : Controller
 
     void TurnFinished()
     {
+        takingTurn = false;
         EndTurn.instance.EndEnmyTurn();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (target == null)
+        {
+            Debug.Log("No target");
+            return;
+        }
+
+        Vector3 lineOfSightOrigin = gameObject.transform.position;
+        lineOfSightOrigin.y += 2;
+
+        Gizmos.color = Color.green;
+        Physics.Linecast(transform.position, target.transform.position);
     }
 }

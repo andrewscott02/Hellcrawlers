@@ -99,7 +99,7 @@ PrefabInstance:
     - target: {fileID: 508964337635066981, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: maxMovement
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 508964337635066981, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
@@ -181,6 +181,11 @@ PrefabInstance:
     - target: {fileID: 3971383897340704321, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: baseArmour
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963800631743705559, guid: 4157449d49c01c645a998f2205722e3d,
+        type: 3}
+      propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6082540650868095283, guid: 4157449d49c01c645a998f2205722e3d,

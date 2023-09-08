@@ -95,7 +95,8 @@ MonoBehaviour:
   actions:
   - {fileID: 11400000, guid: 531ae306516617f49ae8a12622d617b8, type: 2}
   movementLeft: 0
-  maxMovement: 15
+  maxMovement: 20
+  takingTurn: 0
 --- !u!1 &3971383899357663336
 GameObject:
   m_ObjectHideFlags: 0
