@@ -21,7 +21,9 @@ public class CharacterSelect : MonoBehaviour
     void Setup()
     {
         foreach (var item in availableCharacters)
+        {
             item.StartTurn();
+        }
 
         SelectCharacter(0);
     }
@@ -75,7 +77,6 @@ public class CharacterSelect : MonoBehaviour
 
         for (int i = 0; i < availableCharacters.Length; i++)
         {
-            
             if (character == availableCharacters[i])
             {
                 characterCount = i;

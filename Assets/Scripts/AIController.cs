@@ -5,18 +5,10 @@ using UnityEngine.AI;
 
 public class AIController : Controller
 {
-    List<Controller> playerCharacters = new List<Controller>();
-
     protected override void Start()
     {
         base.Start();
         agent.destination = transform.position;
-
-        foreach (var item in GameObject.FindObjectsOfType<Controller>())
-        {
-            if (item is AIController == false)
-                playerCharacters.Add(item);
-        }
     }
 
     // Update is called once per frame
@@ -170,13 +162,16 @@ public class AIController : Controller
         Controller closestCharacter = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach(var item in playerCharacters)
+        foreach(var item in CharacterSelect.instance.availableCharacters)
         {
-            float distance = Vector3.Distance(transform.position, item.transform.position);
-            if (distance < closestDistance)
+            if (item != null)
             {
-                closestCharacter = item;
-                closestDistance = distance;
+                float distance = Vector3.Distance(transform.position, item.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestCharacter = item;
+                    closestDistance = distance;
+                }
             }
         }
 

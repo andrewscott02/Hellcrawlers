@@ -15,7 +15,7 @@ MonoBehaviour:
   actionName: Focus Aim
   selfOnly: 1
   apCost: 1
-  moveCost: 15
+  moveCost: 10
   resetArmour: 0
   castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
   damage: 0
@@ -26,4 +26,4 @@ MonoBehaviour:
   castAnimation: 1
   statuses:
   - {fileID: 11400000, guid: 27120592d3959ec43a2e043b1e5b3ab3, type: 2}
-  description: Use 15 of your movement to increase your damage by 50% this turn
+  description: Use 10 of your movement to increase your damage by 50% this turn

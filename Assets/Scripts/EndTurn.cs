@@ -7,14 +7,13 @@ public class EndTurn : MonoBehaviour
     public static EndTurn instance;
 
     public static bool playerTurn = false;
-    public List<Controller> playerCharacters;
 
     bool[] finishedTurn;
 
     private void Start()
     {
         instance = this;
-        finishedTurn = new bool[playerCharacters.Count];
+        finishedTurn = new bool[CharacterSelect.instance.availableCharacters.Length];
         for (int i = 0; i < finishedTurn.Length; i++)
         {
             finishedTurn[i] = false;
@@ -34,7 +33,7 @@ public class EndTurn : MonoBehaviour
 
         for(int i = 0; i < finishedTurn.Length; i++)
         {
-            if (!finishedTurn[i])
+            if (!finishedTurn[i] && CharacterSelect.instance.availableCharacters[i] != null)
             {
                 endAll = false;
                 CharacterSelect.instance.SelectCharacter(i);
@@ -57,9 +56,10 @@ public class EndTurn : MonoBehaviour
 
     public void StartPlayerTurn()
     {
-        foreach (var item in playerCharacters)
+        foreach (var item in CharacterSelect.instance.availableCharacters)
         {
-            item.StartTurn();
+            if (item != null)
+                item.StartTurn();
         }
 
         for (int i = 0; i < finishedTurn.Length; i++)
