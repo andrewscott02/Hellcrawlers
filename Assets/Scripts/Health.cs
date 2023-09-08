@@ -56,6 +56,7 @@ public class Health : MonoBehaviour
 
     public void Kill()
     {
+        CharacterSelect.instance.CharacterDied(GetComponent<Controller>());
         Destroy(gameObject);
     }
 

@@ -31,13 +31,19 @@ public class CharacterSelect : MonoBehaviour
         if (!EndTurn.playerTurn) return;
 
         InputManager.inputAvailable = false;
+        Invoke("ResetInput", 0.5f);
+
+        if (availableCharacters[index] == null) return;
 
         selectedCharacter = index;
 
         foreach (var item in availableCharacters)
         {
-            item.Unselect();
-            item.StopMovement();
+            if (item != null)
+            {
+                item.Unselect();
+                item.StopMovement();
+            }
         }
 
         availableCharacters[selectedCharacter].controlled = true;
@@ -47,7 +53,7 @@ public class CharacterSelect : MonoBehaviour
 
         vCam.Follow = availableCharacters[selectedCharacter].transform;
 
-        Invoke("ResetInput", 0.5f);
+        
     }
 
     void ResetInput()
@@ -58,5 +64,36 @@ public class CharacterSelect : MonoBehaviour
     public Controller GetSelectedCharacter()
     {
         return availableCharacters[selectedCharacter];
+    }
+
+    public void CharacterDied(Controller character)
+    {
+        if (character is AIController) return;
+
+        int characterCount = 0;
+        bool allDead = true;
+
+        for (int i = 0; i < availableCharacters.Length; i++)
+        {
+            
+            if (character == availableCharacters[i])
+            {
+                characterCount = i;
+            }
+            else if (character != null)
+            {
+                allDead = false;
+            }
+        }
+
+        availableCharacters[characterCount] = null;
+
+        if (allDead)
+            LoseGame();
+    }
+
+    void LoseGame()
+    {
+        //TODO: End game
     }
 }

@@ -15,6 +15,7 @@ public class ArmourUI : MonoBehaviour
 
     public void UpdateArmourUI(int armour)
     {
+        if (text == null) text = GetComponentInChildren<TextMeshProUGUI>();
         text.text = armour.ToString();
     }
 }

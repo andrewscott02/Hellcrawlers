@@ -47,6 +47,10 @@ public class AIController : Controller
             bool inRange = distance <= preparedAction.range;
             canHit = inRange && lineOfSight;
         }
+        else
+        {
+            canHit = false;
+        }
 
         if (moving)
         {
@@ -80,11 +84,23 @@ public class AIController : Controller
 
         canHit = false;
 
+        AssessAction();
+    }
+
+    public void AssessAction()
+    {
+        if (!takingTurn) return;
+
+        StopAllCoroutines();
+
         //AI considerations
         target = DetermineTarget();
         preparedAction = DetermineAction(target);
 
-        Debug.Log(gameObject.name + " is starting turn with " + movementLeft + " and planning to use " + preparedAction.name + " on " + target);
+        if (preparedAction != null)
+            Debug.Log(gameObject.name + " is starting turn with " + movementLeft + " and planning to use " + preparedAction.name + " on " + target);
+        else
+            Debug.Log(gameObject.name + " is starting turn with no action but moving to " + target);
 
         targetPos = target.transform.position;
         agent.SetDestination(targetPos);
@@ -111,27 +127,31 @@ public class AIController : Controller
             Debug.Log(gameObject.name + " is ending turn, doing nothing");
             preparedAction = DetermineAction(target);
             bool lineOfSight = false;
-            RaycastHit perspectiveInfo;
-            Vector3 lineOfSightOrigin = transform.position;
-            lineOfSightOrigin.y += 2;
 
-            if (Physics.Linecast(lineOfSightOrigin, target.transform.position, out perspectiveInfo))
+            if (preparedAction != null)
             {
-                if (perspectiveInfo.collider.GetComponentInParent<Health>() != null)
+                RaycastHit perspectiveInfo;
+                Vector3 lineOfSightOrigin = transform.position;
+                lineOfSightOrigin.y += 2;
+
+                if (Physics.Linecast(lineOfSightOrigin, target.transform.position, out perspectiveInfo))
                 {
-                    Debug.Log("Line of Sight: " + target.gameObject.name + " | " + perspectiveInfo.collider.GetComponentInParent<Health>().gameObject.name);
-                    lineOfSight = target.gameObject == perspectiveInfo.collider.GetComponentInParent<Health>().gameObject;
+                    if (perspectiveInfo.collider.GetComponentInParent<Health>() != null)
+                    {
+                        Debug.Log("Line of Sight: " + target.gameObject.name + " | " + perspectiveInfo.collider.GetComponentInParent<Health>().gameObject.name);
+                        lineOfSight = target.gameObject == perspectiveInfo.collider.GetComponentInParent<Health>().gameObject;
+                    }
                 }
-            }
 
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            bool inRange = distance <= preparedAction.range;
-            canHit = inRange && lineOfSight;
-            if (canHit)
-            {
-                //target within range now
-                Debug.Log(gameObject.name + " is ending turn using: " + preparedAction.actionName);
-                preparedAction.UseAction(this, target.transform.position, target.GetComponent<Health>());
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                bool inRange = distance <= preparedAction.range;
+                canHit = inRange && lineOfSight;
+                if (canHit)
+                {
+                    //target within range now
+                    Debug.Log(gameObject.name + " is ending turn using: " + preparedAction.actionName);
+                    preparedAction.UseAction(this, target.transform.position, target.GetComponent<Health>());
+                }
             }
         }
 
@@ -207,7 +227,6 @@ public class AIController : Controller
         }
 
         //TODO:AI for actions
-        Debug.Log(bestSpell.actionName);
         return bestSpell;
     }
 
@@ -221,7 +240,6 @@ public class AIController : Controller
     {
         if (target == null)
         {
-            Debug.Log("No target");
             return;
         }
 
