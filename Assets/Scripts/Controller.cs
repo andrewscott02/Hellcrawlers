@@ -8,6 +8,7 @@ public class Controller : MonoBehaviour
     #region Setup
 
     public LayerMask layerMask = new LayerMask();
+    public LayerMask obstructions = new LayerMask();
 
     public bool controlled = false;
     public Camera cam;
@@ -76,13 +77,27 @@ public class Controller : MonoBehaviour
 
                     if (Physics.Raycast(ray, out hit, 100, layerMask))
                     {
+                        bool lineOfSight = false;
+                        RaycastHit perspectiveInfo;
+                        Vector3 lineOfSightOrigin = gameObject.transform.position;
+                        lineOfSightOrigin.y += 2;
+
+                        if(Physics.Linecast(lineOfSightOrigin, hit.collider.transform.position, out perspectiveInfo))
+                        {
+                            Debug.Log("Line of Sight: " + hit.collider.gameObject.name + " | " + perspectiveInfo.collider.gameObject.name);
+                            lineOfSight = hit.collider.gameObject == perspectiveInfo.collider.gameObject;
+                        }
+
                         float distance = Vector3.Distance(gameObject.transform.position, hit.point);
+                        bool inRange = distance <= preparedAction.range;
+                        bool canHit = inRange && lineOfSight;
 
                         Debug.Log(hit.collider.gameObject.name + " | " + hit.collider.tag);
                         if (hit.collider.tag == "Character")
                         {
                             distance = Vector3.Distance(gameObject.transform.position, hit.collider.transform.position);
-                            Color highlightColour = distance <= preparedAction.range ? Color.green : Color.red;
+                            canHit = inRange && lineOfSight;
+                            Color highlightColour = canHit ? Color.green : Color.red;
                             targetEffect.Highlight(hit.collider.transform.position, highlightColour);
                         }
                         else
@@ -104,7 +119,7 @@ public class Controller : MonoBehaviour
                         //On left click
                         if (Input.GetMouseButtonDown(0))
                         {
-                            if (distance <= preparedAction.range)
+                            if (canHit)
                             {
                                 Health target = hit.collider.tag == "Character" ? hit.collider.GetComponentInParent<Health>() : null;
 
@@ -240,11 +255,11 @@ public class Controller : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(ray.origin, hit.point);
+                Vector3 lineOfSightOrigin = gameObject.transform.position;
+                lineOfSightOrigin.y += 2;
 
-                Gizmos.color = Color.blue;
-                Gizmos.DrawLine(transform.position, hit.point);
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(lineOfSightOrigin, hit.collider.transform.position);
             }
             else
             {

@@ -21,7 +21,12 @@ public class Health : MonoBehaviour
     private void Start()
     {
         armourUI = GetComponentInChildren<ArmourUI>();
-        ResetArmour();
+        SetupArmour();
+    }
+
+    public void SetupArmour()
+    {
+        armour = baseArmour;
     }
 
     public void ResetArmour()
