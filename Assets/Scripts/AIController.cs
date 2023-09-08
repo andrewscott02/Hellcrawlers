@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIController : Controller
 {
@@ -49,6 +50,14 @@ public class AIController : Controller
 
         if (moving)
         {
+            NavMeshPath path = agent.path;
+            if (agent.CalculatePath(targetPos, path) == false)
+            {
+                //TODO: Not working - fix
+                Debug.Log("No path");
+                movementLeft = 0;
+            }
+
             endPos = transform.position;
             float moved = Vector3.Distance(startPos, endPos);
             movementLeft -= moved;

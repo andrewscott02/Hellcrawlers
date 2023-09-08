@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3777281427891379011}
   - component: {fileID: 3971383897340704321}
   - component: {fileID: 508964337635066981}
+  - component: {fileID: 8164759750187003014}
   m_Layer: 0
   m_Name: Infantry
   m_TagString: Character
@@ -46,7 +47,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3777281427891379009}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 10
   m_Acceleration: 10
   avoidancePriority: 50
@@ -97,6 +98,22 @@ MonoBehaviour:
   movementLeft: 0
   maxMovement: 20
   takingTurn: 0
+--- !u!208 &8164759750187003014
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3777281427891379009}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 0.925, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.94, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3971383899357663336
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3971383899357663339}
   - component: {fileID: 3971383899357663338}
+  - component: {fileID: 5573375271045861580}
   m_Layer: 7
   m_Name: Collider
   m_TagString: Character
@@ -143,6 +161,22 @@ CapsuleCollider:
   m_Height: 1.85
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5573375271045861580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971383899357663336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &713221463975433752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -332,6 +366,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c65eeed0e623d84468374b51a0d355da, type: 3}
+--- !u!1 &7107707718590251918 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: c65eeed0e623d84468374b51a0d355da,
+    type: 3}
+  m_PrefabInstance: {fileID: 7107707718590154030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &641888769638092483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107707718590251918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &7107707718842541518
 PrefabInstance:
   m_ObjectHideFlags: 0
