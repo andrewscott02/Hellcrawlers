@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Cinemachine;
 
 public class CharacterSelect : MonoBehaviour
@@ -81,8 +82,9 @@ public class CharacterSelect : MonoBehaviour
             {
                 characterCount = i;
             }
-            else if (character != null)
+            else if (availableCharacters[i] != null)
             {
+                //Character is alive
                 allDead = false;
             }
         }
@@ -90,11 +92,36 @@ public class CharacterSelect : MonoBehaviour
         availableCharacters[characterCount] = null;
 
         if (allDead)
+        {
+            Debug.Log("All characters are dead");
             LoseGame();
+        }
+        else
+        {
+            foreach (var item in GameObject.FindObjectsOfType<AIController>())
+            {
+                item.AssessAction();
+            }
+
+            if (characterCount == selectedCharacter)
+            {
+                for (int i = 0; i < availableCharacters.Length; i++)
+                {
+                    if (character != null)
+                    {
+                        SelectCharacter(i);
+                        break;
+                    }
+                }
+            }
+        }
     }
+
+    public E_Scenes gameOverScene;
 
     void LoseGame()
     {
         //TODO: End game
+        SceneManager.LoadScene(gameOverScene.ToString());
     }
 }

@@ -11,6 +11,9 @@ public class AIController : Controller
         agent.destination = transform.position;
     }
 
+    float moveTime = 0;
+    float maxMoveTime = 5;
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -46,8 +49,9 @@ public class AIController : Controller
 
         if (moving)
         {
-            NavMeshPath path = agent.path;
-            if (agent.CalculatePath(targetPos, path) == false)
+            moveTime += Time.deltaTime;
+
+            if (moveTime >= maxMoveTime)
             {
                 //TODO: Not working - fix
                 Debug.Log("No path");
@@ -77,6 +81,12 @@ public class AIController : Controller
         canHit = false;
 
         AssessAction();
+    }
+
+    public override void StopMovement()
+    {
+        base.StopMovement();
+        moveTime = 0;
     }
 
     public void AssessAction()
@@ -175,12 +185,19 @@ public class AIController : Controller
             }
         }
 
-        Debug.Log(closestCharacter.gameObject.name);
+        if (closestCharacter != null)
+            Debug.Log(closestCharacter.gameObject.name);
         return closestCharacter;
     }
 
     Action DetermineAction(Controller target)
     {
+        if (target == null)
+        {
+            AssessAction();
+            return null;
+        }
+
         Health targetHealth = target.GetComponent<Health>();
 
         Action bestSpell = null;

@@ -237,7 +237,7 @@ public class Controller : MonoBehaviour
             StopMovement();
     }
 
-    public void StopMovement()
+    public virtual void StopMovement()
     {
         agent.SetDestination(transform.position);
         AnimateMove(false);
