@@ -23,5 +23,6 @@ MonoBehaviour:
   changeArmour: 0
   changeMovement: 0
   range: 3
+  castAnimation: 0
   statuses: []
   description: Hit a target for 6 damage

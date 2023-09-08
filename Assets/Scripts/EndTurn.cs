@@ -9,9 +9,16 @@ public class EndTurn : MonoBehaviour
     public static bool playerTurn = false;
     public List<Controller> playerCharacters;
 
+    bool[] finishedTurn;
+
     private void Start()
     {
         instance = this;
+        finishedTurn = new bool[playerCharacters.Count];
+        for (int i = 0; i < finishedTurn.Length; i++)
+        {
+            finishedTurn[i] = false;
+        }
         StartPlayerTurn();
     }
 
@@ -21,8 +28,27 @@ public class EndTurn : MonoBehaviour
 
         InputManager.inputAvailable = false;
 
-        Invoke("ResetInput", 0.5f);
+        finishedTurn[CharacterSelect.instance.selectedCharacter] = true;
 
+        bool endAll = true;
+
+        for(int i = 0; i < finishedTurn.Length; i++)
+        {
+            if (!finishedTurn[i])
+            {
+                endAll = false;
+                CharacterSelect.instance.SelectCharacter(i);
+            }
+        }
+
+        if (endAll)
+            EndAllTurns();
+
+        Invoke("ResetInput", 0.5f);
+    }
+
+    private void EndAllTurns()
+    {
         if (!playerTurn) return;
         playerTurn = false;
 
@@ -34,6 +60,11 @@ public class EndTurn : MonoBehaviour
         foreach (var item in playerCharacters)
         {
             item.StartTurn();
+        }
+
+        for (int i = 0; i < finishedTurn.Length; i++)
+        {
+            finishedTurn[i] = false;
         }
 
         playerTurn = true;

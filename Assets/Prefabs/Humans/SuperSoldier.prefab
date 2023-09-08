@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 3971383897340704321, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}
       propertyPath: baseArmour
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7541834005415025299, guid: 4157449d49c01c645a998f2205722e3d,
         type: 3}

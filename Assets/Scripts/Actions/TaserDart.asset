@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc4f71b218818524b839f7a26def5e76, type: 3}
-  m_Name: Maim
+  m_Name: TaserDart
   m_EditorClassIdentifier: 
-  actionName: Maim
+  actionName: Taser Dart
   selfOnly: 0
   apCost: 1
   moveCost: 0
@@ -25,5 +25,5 @@ MonoBehaviour:
   range: 20
   castAnimation: 0
   statuses:
-  - {fileID: 11400000, guid: 490b5a02845ea2c45a3277582594908f, type: 2}
+  - {fileID: 11400000, guid: d52f22342f632b041a617febce64c21b, type: 2}
   description: Reduce target damage and movement by 20%

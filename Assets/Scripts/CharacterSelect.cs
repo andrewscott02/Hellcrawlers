@@ -5,13 +5,15 @@ using Cinemachine;
 
 public class CharacterSelect : MonoBehaviour
 {
+    public static CharacterSelect instance;
     public CinemachineVirtualCamera vCam;
     ActionSelect actionSelect;
-    int selectedCharacter;
+    public int selectedCharacter { get; private set; }
     public Controller[] availableCharacters;
 
     private void Start()
     {
+        instance = this;
         actionSelect = GameObject.FindAnyObjectByType<ActionSelect>();
         Invoke("Setup", 0.05f);
     }

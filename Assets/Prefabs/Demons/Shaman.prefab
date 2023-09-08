@@ -102,7 +102,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: a30630e0279fe6d4f8fcca57de86223d, type: 2}
-  - {fileID: 11400000, guid: a30630e0279fe6d4f8fcca57de86223d, type: 2}
+  - {fileID: 11400000, guid: b00a5e088989f944fbb09147f2b05eaa, type: 2}
   - {fileID: 11400000, guid: c72c0f2ed8f1d7446a34b4d17db67388, type: 2}
   - {fileID: 11400000, guid: 05c3b70113d4ca149b771b9d69bd300b, type: 2}
   movementLeft: 0
