@@ -1415,7 +1415,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -289.5843, y: -80}
+  m_AnchoredPosition: {x: -135.15, y: -80}
   m_SizeDelta: {x: 523.2477, y: 109.6951}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1452060041
@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hellcrawlers
+  m_text: Overkill
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
