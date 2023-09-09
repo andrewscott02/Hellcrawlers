@@ -3614,7 +3614,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bombardier
+  m_text: Titan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3970,7 +3970,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Soldier
+  m_text: Hunter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8763,7 +8763,7 @@ PrefabInstance:
     - target: {fileID: 249573674997918904, guid: 2a28d820bf977c549962bcbc331ed6a9,
         type: 3}
       propertyPath: m_Name
-      value: Soldier
+      value: Hunter
       objectReference: {fileID: 0}
     - target: {fileID: 249573674997918905, guid: 2a28d820bf977c549962bcbc331ed6a9,
         type: 3}
@@ -8971,7 +8971,7 @@ PrefabInstance:
     - target: {fileID: 5248108022691046211, guid: f3cb6233910d15c469057378987bc366,
         type: 3}
       propertyPath: m_Name
-      value: Bombadier
+      value: Titan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3cb6233910d15c469057378987bc366, type: 3}

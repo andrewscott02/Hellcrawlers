@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc4f71b218818524b839f7a26def5e76, type: 3}
-  m_Name: RendingCurse
+  m_Name: ViciousStab
   m_EditorClassIdentifier: 
-  actionName: Rending Curse
+  actionName: Vicious Stab
   selfOnly: 0
-  apCost: 2
+  apCost: 1
   moveCost: 0
   resetArmour: 0
-  castFX: {fileID: 100014, guid: 9d83be87fd629224ba6c2baee15575c6, type: 3}
+  castFX: {fileID: 100006, guid: a05f87813b6db074da1696ef2d54a1aa, type: 3}
   projectileFX: {fileID: 100000, guid: 1fa2a2bd4e52b844e8fd04b27b28f6f1, type: 3}
-  damage: 1
+  damage: 6
   armourScaling: 0
-  changeArmour: -5
+  changeArmour: 0
   changeMovement: 0
-  range: 20
-  castAnimation: 0
-  audioClip: {fileID: 8300000, guid: ff3b9f1ddcc2dd44e9ad2fbd24c2aa16, type: 3}
+  range: 3
+  castAnimation: 1
+  audioClip: {fileID: 8300000, guid: b3106b39919700c45acdee4b9151124d, type: 3}
   statuses: []
-  description: Reduce target's armour by 5 and hit target for 1 damage
+  description: Hit a target for 6 damage

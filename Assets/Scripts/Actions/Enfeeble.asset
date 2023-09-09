@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Enfeeble
   selfOnly: 0
-  apCost: 2
+  apCost: 1
   moveCost: 0
   resetArmour: 0
   castFX: {fileID: 100014, guid: 9d83be87fd629224ba6c2baee15575c6, type: 3}

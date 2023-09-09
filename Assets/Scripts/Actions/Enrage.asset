@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc4f71b218818524b839f7a26def5e76, type: 3}
-  m_Name: RendingCurse
+  m_Name: Enrage
   m_EditorClassIdentifier: 
-  actionName: Rending Curse
-  selfOnly: 0
-  apCost: 2
+  actionName: Enrage
+  selfOnly: 1
+  apCost: 1
   moveCost: 0
   resetArmour: 0
-  castFX: {fileID: 100014, guid: 9d83be87fd629224ba6c2baee15575c6, type: 3}
+  castFX: {fileID: 100006, guid: e3c9f2dcabdba44449e47bb79ecd9ba7, type: 3}
   projectileFX: {fileID: 100000, guid: 1fa2a2bd4e52b844e8fd04b27b28f6f1, type: 3}
-  damage: 1
+  damage: 0
   armourScaling: 0
-  changeArmour: -5
+  changeArmour: 0
   changeMovement: 0
-  range: 20
-  castAnimation: 0
-  audioClip: {fileID: 8300000, guid: ff3b9f1ddcc2dd44e9ad2fbd24c2aa16, type: 3}
-  statuses: []
-  description: Reduce target's armour by 5 and hit target for 1 damage
+  range: 1
+  castAnimation: 1
+  audioClip: {fileID: 0}
+  statuses:
+  - {fileID: 11400000, guid: 27120592d3959ec43a2e043b1e5b3ab3, type: 2}
+  description: Increase your damage by 100% this turn
