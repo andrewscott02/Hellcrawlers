@@ -20,5 +20,5 @@ public class SplashScreen : MonoBehaviour
 
 public enum E_Scenes
 {
-    SplashScreen, DemoLevel 
+    SplashScreen, DemoLevel, Victory, Defeat
 }

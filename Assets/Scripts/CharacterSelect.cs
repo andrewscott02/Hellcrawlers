@@ -11,6 +11,7 @@ public class CharacterSelect : MonoBehaviour
     ActionSelect actionSelect;
     public int selectedCharacter { get; private set; }
     public Controller[] availableCharacters;
+    public int enemyCount;
 
     private void Start()
     {
@@ -25,6 +26,8 @@ public class CharacterSelect : MonoBehaviour
         {
             item.StartTurn();
         }
+
+        foreach (var item in GameObject.FindObjectsOfType<AIController>()) enemyCount++;
 
         SelectCharacter(0);
     }
@@ -71,7 +74,15 @@ public class CharacterSelect : MonoBehaviour
 
     public void CharacterDied(Controller character)
     {
-        if (character is AIController) return;
+        if (character is AIController)
+        {
+            enemyCount--;
+
+            if (enemyCount <= 0)
+                WinGame();
+
+            return;
+        }
 
         int characterCount = 0;
         bool allDead = true;
@@ -117,7 +128,13 @@ public class CharacterSelect : MonoBehaviour
         }
     }
 
-    public E_Scenes gameOverScene;
+    public E_Scenes gameOverScene, winGameScene;
+
+    void WinGame()
+    {
+        //TODO: End game
+        SceneManager.LoadScene(winGameScene.ToString());
+    }
 
     void LoseGame()
     {

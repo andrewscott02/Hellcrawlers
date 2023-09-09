@@ -245,6 +245,7 @@ public class AIController : Controller
     void TurnFinished()
     {
         takingTurn = false;
+        StopMovement();
         EndTurn.instance.EndEnmyTurn();
     }
 

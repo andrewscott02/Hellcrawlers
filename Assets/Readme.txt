@@ -1,9 +1,6 @@
 Used Assets
 
 Asset Packs:
-
-
-3D models and Animations:
 Outdoor Ground Textures - https://assetstore.unity.com/packages/2d/textures-materials/floors/outdoor-ground-textures-12555
 Brick House - https://assetstore.unity.com/packages/3d/environments/landscapes/brick-house-74214
 Apartment Building - https://assetstore.unity.com/packages/3d/environments/urban/apartment-building-73310
@@ -16,7 +13,7 @@ Deep Space Skybox Pack - https://assetstore.unity.com/packages/2d/textures-mater
 Staff Of Pain - https://assetstore.unity.com/packages/3d/props/weapons/staff-of-pain-48820
 UAA - City Props - Vehicles - https://assetstore.unity.com/packages/3d/vehicles/land/uaa-city-props-vehicles-120339
 
-
+3D models and animations are all from mixamo - https://www.mixamo.com/#/
 
 Sound Effects:
 11095 ancestor curse spell.wav - https://freesound.org/people/Robinhood76/sounds/631769/

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EndTurn : MonoBehaviour
 {
@@ -68,6 +69,7 @@ public class EndTurn : MonoBehaviour
         }
 
         playerTurn = true;
+        turnText.text = "Player Turn";
     }
 
     int enemyCount = 0;
@@ -82,6 +84,8 @@ public class EndTurn : MonoBehaviour
         {
             item.StartTurn();
         }
+
+        turnText.text = "Enemy Turn";
     }
 
     public void EndEnmyTurn()
@@ -98,4 +102,6 @@ public class EndTurn : MonoBehaviour
     {
         InputManager.inputAvailable = true;
     }
+
+    public TextMeshProUGUI turnText;
 }
