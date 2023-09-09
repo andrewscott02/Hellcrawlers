@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 823b8ee7355f872449d5a9a53cc6169c, type: 3}
-  m_Name: Crippled
+  m_Name: TaserDartEnemy
   m_EditorClassIdentifier: 
   duration: 1
   armourOnHit: 0
   damageScaling: 0
-  moveScaling: -1
+  moveScaling: -0.2

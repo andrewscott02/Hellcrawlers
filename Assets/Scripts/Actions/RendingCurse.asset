@@ -21,10 +21,10 @@ MonoBehaviour:
   projectileFX: {fileID: 100000, guid: 1fa2a2bd4e52b844e8fd04b27b28f6f1, type: 3}
   damage: 1
   armourScaling: 0
-  changeArmour: -5
+  changeArmour: -4
   changeMovement: 0
   range: 20
   castAnimation: 0
   audioClip: {fileID: 8300000, guid: ff3b9f1ddcc2dd44e9ad2fbd24c2aa16, type: 3}
   statuses: []
-  description: Reduce target's armour by 5 and hit target for 1 damage
+  description: Reduce target's armour by 4 and hit target for 1 damage

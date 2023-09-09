@@ -121,6 +121,7 @@ public class Health : MonoBehaviour
             moveScaling += item.Key.moveScaling;
         }
 
+        if (moveScaling < 0) moveScaling = 0;
         return moveScaling;
     }
 

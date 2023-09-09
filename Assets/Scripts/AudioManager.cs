@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = currentVolume;
     }
 
-    public void PlaySoundEffect(AudioClip soundEffect, float volume)
+    public void PlaySoundEffect(AudioClip soundEffect, float volume = 1f)
     {
         if (audioSource != null && soundEffect != null)
         {

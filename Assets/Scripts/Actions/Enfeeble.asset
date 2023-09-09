@@ -23,7 +23,7 @@ MonoBehaviour:
   armourScaling: 0
   changeArmour: 0
   changeMovement: 0
-  range: 15
+  range: 20
   castAnimation: 0
   audioClip: {fileID: 8300000, guid: ff3b9f1ddcc2dd44e9ad2fbd24c2aa16, type: 3}
   statuses:

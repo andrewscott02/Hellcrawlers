@@ -71,7 +71,7 @@ public class Action : ScriptableObject
         GameObject projectileObj = Instantiate(projectileFX, character.transform.position + character.castOffset, new Quaternion(0, 0, 0, 0)) as GameObject;
         ProjectileMovement projMovement = projectileObj.GetComponent<ProjectileMovement>();
 
-        AudioManager.instance.PlaySoundEffect(audioClip, 0.3f);
+        AudioManager.instance.PlaySoundEffect(audioClip);
 
         if (projMovement != null)
         {
