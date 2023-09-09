@@ -17,7 +17,7 @@ MonoBehaviour:
   apCost: 2
   moveCost: 0
   resetArmour: 0
-  castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
+  castFX: {fileID: 100006, guid: 902fc3dc7f451eb489cfa17112e3d079, type: 3}
   damage: 1
   armourScaling: 0
   changeArmour: -3

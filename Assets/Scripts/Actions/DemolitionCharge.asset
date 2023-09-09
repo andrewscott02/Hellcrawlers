@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: DemolitionCharge
   m_EditorClassIdentifier: 
   actionName: Demolition Charge
+  selfOnly: 0
   apCost: 2
   moveCost: 0
   resetArmour: 0
-  castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
+  castFX: {fileID: 100006, guid: 849fbbf5f73205f4780cbf2a8583a32a, type: 3}
   damage: 15
   armourScaling: 0
   changeArmour: 0
   changeMovement: 0
   range: 20
+  castAnimation: 0
+  statuses: []
   description: Hit all targets in an AOE for 15 damage

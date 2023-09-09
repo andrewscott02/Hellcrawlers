@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Riposte
   m_EditorClassIdentifier: 
   actionName: Riposte
+  selfOnly: 0
   apCost: 2
   moveCost: 0
   resetArmour: 1
-  castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
+  castFX: {fileID: 100006, guid: a05f87813b6db074da1696ef2d54a1aa, type: 3}
   damage: 0
   armourScaling: 1
   changeArmour: 0
   changeMovement: 0
   range: 3
+  castAnimation: 0
+  statuses: []
   description: 'Hit a target, dealing an amount of damage equal to your armour
 
 

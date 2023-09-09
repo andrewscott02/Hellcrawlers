@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0
   armourOnHit: 0
-  damageScaling: 0.5
+  damageScaling: 1
+  moveScaling: 0
