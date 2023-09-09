@@ -22,6 +22,14 @@ public class EndTurn : MonoBehaviour
         StartPlayerTurn();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ButtonPressed();
+        }
+    }
+
     public void ButtonPressed()
     {
         if (!EndTurn.playerTurn) return;
