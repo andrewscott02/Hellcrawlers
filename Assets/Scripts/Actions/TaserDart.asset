@@ -25,6 +25,7 @@ MonoBehaviour:
   changeMovement: 0
   range: 20
   castAnimation: 0
+  audioClip: {fileID: 8300000, guid: de1c1794f90d3b240ab31c51581ec473, type: 3}
   statuses:
   - {fileID: 11400000, guid: d52f22342f632b041a617febce64c21b, type: 2}
   description: Reduce target damage and movement by 20%

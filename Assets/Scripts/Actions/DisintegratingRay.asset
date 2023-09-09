@@ -25,5 +25,6 @@ MonoBehaviour:
   changeMovement: 0
   range: 20
   castAnimation: 0
+  audioClip: {fileID: 8300000, guid: de1c1794f90d3b240ab31c51581ec473, type: 3}
   statuses: []
   description: Hit a target for 30 damage

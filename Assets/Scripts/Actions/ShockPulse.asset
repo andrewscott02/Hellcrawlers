@@ -25,6 +25,7 @@ MonoBehaviour:
   changeMovement: 0
   range: 6
   castAnimation: 0
+  audioClip: {fileID: 8300000, guid: de1c1794f90d3b240ab31c51581ec473, type: 3}
   statuses:
   - {fileID: 11400000, guid: 98fd54a58f0fcc44d8b339e2c544c04b, type: 2}
   description: 'Reduce target''s armour by 3 and hit target for 1 damage

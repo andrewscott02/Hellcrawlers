@@ -20,6 +20,7 @@ public class Action : ScriptableObject
     public float range = 20;
 
     public Animations castAnimation = Animations.Attack;
+    public AudioClip audioClip;
 
     public StatusEffect[] statuses;
 
@@ -69,6 +70,8 @@ public class Action : ScriptableObject
         //Spawn fx at cast pos
         GameObject projectileObj = Instantiate(projectileFX, character.transform.position + character.castOffset, new Quaternion(0, 0, 0, 0)) as GameObject;
         ProjectileMovement projMovement = projectileObj.GetComponent<ProjectileMovement>();
+
+        AudioManager.instance.PlaySoundEffect(audioClip, 0.3f);
 
         if (projMovement != null)
         {

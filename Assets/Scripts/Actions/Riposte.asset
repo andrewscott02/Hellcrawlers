@@ -25,6 +25,7 @@ MonoBehaviour:
   changeMovement: 0
   range: 3
   castAnimation: 0
+  audioClip: {fileID: 8300000, guid: b3106b39919700c45acdee4b9151124d, type: 3}
   statuses: []
   description: 'Hit a target, dealing an amount of damage equal to your armour
 

@@ -25,6 +25,7 @@ MonoBehaviour:
   changeMovement: 0
   range: 10
   castAnimation: 1
+  audioClip: {fileID: 8300000, guid: 38c0793b199e93842ba37010f4a99902, type: 3}
   statuses:
   - {fileID: 11400000, guid: e7cfc07566461fc4a99c951c643af73a, type: 2}
   description: Increase an ally's damage by 100% this turn

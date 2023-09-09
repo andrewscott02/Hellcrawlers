@@ -25,6 +25,7 @@ MonoBehaviour:
   changeMovement: 0
   range: 15
   castAnimation: 0
+  audioClip: {fileID: 8300000, guid: ff3b9f1ddcc2dd44e9ad2fbd24c2aa16, type: 3}
   statuses:
   - {fileID: 11400000, guid: c1900f79eeea75e4b8a7969132e47e04, type: 2}
   description: Decrease an enemy's damage by 50% this turn
