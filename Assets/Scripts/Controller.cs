@@ -7,6 +7,8 @@ public class Controller : MonoBehaviour
 {
     #region Setup
 
+    public Vector3 castOffset = new Vector3(0, 2, 0);
+
     public LayerMask layerMask = new LayerMask();
     public LayerMask obstructions = new LayerMask();
 

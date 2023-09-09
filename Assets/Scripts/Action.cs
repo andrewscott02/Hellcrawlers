@@ -11,6 +11,7 @@ public class Action : ScriptableObject
     public float moveCost;
     public bool resetArmour;
     public Object castFX;
+    public Object projectileFX;
 
     public int damage = 0;
     public int armourScaling;
@@ -66,7 +67,17 @@ public class Action : ScriptableObject
         Debug.Log(message);
 
         //Spawn fx at cast pos
-        Instantiate(castFX, castPos, new Quaternion(0, 0, 0, 0));
+        GameObject projectileObj = Instantiate(projectileFX, character.transform.position + character.castOffset, new Quaternion(0, 0, 0, 0)) as GameObject;
+        ProjectileMovement projMovement = projectileObj.GetComponent<ProjectileMovement>();
+
+        if (projMovement != null)
+        {
+            projMovement.StartMovement(castPos, 30, 1, castFX);
+        }
+        else
+        {
+            Destroy(projectileObj);
+        }
 
         //Animation
         if (character.animController != null)

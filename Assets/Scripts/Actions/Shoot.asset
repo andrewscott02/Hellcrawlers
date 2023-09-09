@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: Shoot
   m_EditorClassIdentifier: 
   actionName: Shoot
+  selfOnly: 0
   apCost: 1
   moveCost: 0
   resetArmour: 0
   castFX: {fileID: 5948595106670538758, guid: c43594412015398459a7c96f3f939c4a, type: 3}
+  projectileFX: {fileID: 100000, guid: 1fa2a2bd4e52b844e8fd04b27b28f6f1, type: 3}
   damage: 5
   armourScaling: 0
   changeArmour: 0
   changeMovement: 0
   range: 20
+  castAnimation: 0
+  statuses: []
   description: Hit a target for 5 damage

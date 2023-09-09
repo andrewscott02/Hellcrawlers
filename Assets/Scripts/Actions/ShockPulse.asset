@@ -18,6 +18,7 @@ MonoBehaviour:
   moveCost: 0
   resetArmour: 0
   castFX: {fileID: 100006, guid: 902fc3dc7f451eb489cfa17112e3d079, type: 3}
+  projectileFX: {fileID: 100000, guid: 1fa2a2bd4e52b844e8fd04b27b28f6f1, type: 3}
   damage: 1
   armourScaling: 0
   changeArmour: -3
